@@ -1,0 +1,24 @@
+/* Controles discretos, situados después del contenido editorial. */
+.card-participation{display:block;font-size:12px;color:var(--muted);margin:16px 0 12px}
+.participation{max-width:780px;border-top:1px solid var(--line);padding-top:30px;margin:48px 0 40px}
+.participation h2{font-size:30px;letter-spacing:-.7px;margin-bottom:12px}
+.participation h3{font-size:24px;margin:30px 0 8px}
+.participation-help{font-size:12px;line-height:1.6;color:var(--muted);margin:10px 0 20px}
+.participation-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:14px 22px;margin:22px 0}
+.participation-summary{font-size:13px;color:var(--muted);margin:0}
+.like-button{background:transparent;color:var(--accent-ink);border:1px solid var(--line);padding:9px 14px;gap:9px}
+.like-button svg{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.like-button:hover{background:#E6EEF5;color:var(--accent-ink);border-color:var(--accent-ink)}
+.like-button[aria-pressed=true]{background:#8DC6FF;border-color:var(--accent-ink);color:var(--accent-ink)}
+.like-button[aria-pressed=true] svg{fill:currentColor}
+#like-count{min-width:1.5ch;font-variant-numeric:tabular-nums}
+.comment-list{list-style:none;padding:0;margin:0 0 28px}
+.comment{padding:18px 0;border-bottom:1px solid var(--line)}
+.comment-author{font-size:13px;font-weight:bold;margin:0 0 6px}
+.comment-text{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.comment-form{max-width:none}
+.comment-form label{margin-bottom:0}
+.comment-form textarea{min-height:105px}
+.comment-form .error{margin:0 0 12px}
+.comment-form .error:empty,.comment-form #comment-status:empty{display:none}
+@media(max-width:720px){.participation{margin-top:36px}.participation h2{font-size:27px}.participation-toolbar{gap:12px}}
