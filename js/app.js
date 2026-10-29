@@ -145,7 +145,7 @@ function initHeroVideo() {
   video.muted = true;
   video.addEventListener('playing', () => video.classList.add('is-playing'));
   video.addEventListener('error', fallback);
-  video.src = 'assets/espacio-demo.webm';
+  video.src = 'assets/video_inicio.mp4';
   video.play().catch(fallback);
 }
 function initVideo() {
