@@ -10,3 +10,6 @@ nav a[aria-current=page]{box-shadow:inset 0 -7px 0 var(--accent)}
 
 /* Redes sociales del pie: logos locales y nombres visibles. */
 footer .social-links{gap:12px;align-items:center}footer .social-links a{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:8px 12px;border:1px solid transparent;text-decoration:none;font-size:13px;color:var(--ink);background:var(--paper)}footer .social-links a:hover{border-color:var(--primary);color:var(--primary)}footer .social-links img{display:block;flex:none}
+
+/* Video de portada: la imagen permanece debajo como alternativa. */
+.hero-art .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;margin:0;background:transparent;opacity:0;pointer-events:none}.hero-art .hero-video.is-playing{opacity:1}
