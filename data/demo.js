@@ -71,6 +71,7 @@ window.DEMO = {
   },
   {
     "id": "casa-patio",
+    "architectIds": ["elena-rios"],
     "title": "La casa que mira hacia adentro",
     "format": "Artículo escrito",
     "themes": [
@@ -88,6 +89,7 @@ window.DEMO = {
   },
   {
     "id": "taller-abierto",
+    "architectIds": ["ines-valle"],
     "title": "Un nuevo capítulo para lo existente",
     "format": "Entrevista",
     "themes": [
@@ -105,6 +107,7 @@ window.DEMO = {
   },
   {
     "id": "jardin-comun",
+    "architectIds": ["amalia-sur"],
     "title": "Un paisaje para encontrarnos",
     "format": "Artículo escrito",
     "themes": [

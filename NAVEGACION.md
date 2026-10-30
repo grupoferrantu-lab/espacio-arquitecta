@@ -87,3 +87,9 @@ Comunidad incluye el botón «Contáctanos», que abre el contacto general demos
 Las rutas anteriores `#/proyectos`, `#/proyecto/...`, `#/articulo/...` y `#/alcance` se retiraron y no se enlazan desde el sitio. Una dirección inexistente muestra la pantalla de contenido no encontrado con retorno a Inicio.
 
 El alcance técnico y las posibilidades futuras se documentan en el README, sin crear nodos de navegación en el prototipo. La fuente reutilizable del diagrama está en `navegacion.mmd`.
+
+## Accesos de portada: Sus Voces y Sus Proyectos
+
+La portada ofrece «Conoce a las arquitectas», «Sus Voces» (`#/voces`) y «Sus Proyectos» (`#/proyectos`). «01 / HABITAR EL ENCUENTRO», sobre el video, enlaza a Comunidad en lugar del antiguo botón «Descubre el espacio».
+
+Ambos listados combinan filtros de arquitecta y tema, muestran un contador, estado vacío y botón para limpiar filtros. Sus Voces reúne publicaciones de formato Podcast; Sus Proyectos reúne las publicaciones de temática Proyectos. Cada tarjeta abre su detalle editorial existente. Las asociaciones con profesionales se indican con `architectIds` en los datos; los contenidos sin asociación se muestran como «Sin arquitecta asignada». Los proyectos siguen siendo publicaciones editoriales, sin crear registros de obra independientes. El menú principal mantiene sus seis opciones.

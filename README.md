@@ -72,3 +72,7 @@ Indica la sección, el cambio esperado y, si corresponde, facilita logo, paleta,
 Fondo principal blanco (#FFFFFF), azul principal #2B73C7, celeste #8DC6FF, superficies #E6EEF5, gris #8B98A5 y texto #1B2631. Los botones principales usan azul con texto blanco; los estados secundarios y monogramas utilizan celeste. Las imágenes y el video muestran sus colores originales, sin filtros de escala de grises. Comunidad conserva «Contáctanos» y su contacto general demostrativo sin envío de información.
 
 Los logos de las redes se encuentran como SVG locales en `assets/redes/`. Los destinos son los enlaces indicados por la clienta.
+
+## Listados desde Inicio
+
+«Sus Voces» (`#/voces`) lista los podcasts y «Sus Proyectos» (`#/proyectos`) las publicaciones de temática Proyectos. Ambos permiten filtrar por arquitecta y tema, combinarlos y restablecerlos. `architectIds` vincula publicaciones con los identificadores de profesionales; la ausencia de vínculo aparece como «Sin arquitecta asignada». El podcast actual sigue siendo un guion demostrativo sin audio. El enlace «HABITAR EL ENCUENTRO» sobre el video lleva a Comunidad.

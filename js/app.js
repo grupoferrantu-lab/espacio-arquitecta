@@ -13,7 +13,7 @@ const eventRow=e=>`<article class="event"><div class="date"><strong>${e.day}</st
 const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p><h1>${title}</h1>${desc?`<p class="lead">${desc}</p>`:''}</div>`;
 const shell=html=>`<section class="wrap">${html}</section>`;
 const crumb=(path,label)=>`<div class="breadcrumb">${link('inicio','Inicio')} / ${link(path,label)}</div>`;
-function home(){return `<section class="hero"><div class="hero-copy"><p class="eyebrow">Arquitectura · Comunidad · Conexiones</p><h1>Un espacio para<br><em>construir juntas.</em></h1><p class="lead">Conectamos miradas, compartimos experiencias y damos lugar a nuevas posibilidades en la arquitectura.</p><div class="actions">${link('directorio','Conoce a las arquitectas ↗','button')}${link('comunidad','Descubre el espacio','button secondary')}</div><p class="micro">Una comunidad por imaginar. Una maqueta para explorar.</p></div><div class="hero-art"><img src="assets/patio.svg" alt="Ilustración arquitectónica de un patio con arcos, vegetación y luz cálida" width="800" height="800"><video class="hero-video" src="assets/video_inicio.mp4" poster="assets/patio.svg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><div class="art-caption"><span>01 / HABITAR EL ENCUENTRO</span><span>Ilustración conceptual · Demo</span></div></div></section><div class="strip"><span>Miradas diversas</span><span>Conocimiento compartido</span><span>Conexiones que crecen</span></div><section class="wrap"><div class="section-heading"><div><p class="eyebrow">El valor de encontrarnos</p><h2>Distintas trayectorias.<br>Un horizonte compartido.</h2></div><p class="lead">Un lugar para visibilizar el trabajo de arquitectas y explorar nuevas formas de colaboración.</p></div><div class="grid">${D.people.slice(0,3).map(personCard).join('')}</div><div class="actions">${link('directorio','Explorar el directorio completo →','button secondary')}</div></section><section class="band"><div class="wrap split"><div><p class="eyebrow">Somos espacio</p><h2>La arquitectura crece<br>cuando se comparte.</h2><p>Imaginamos una red que abra conversaciones entre generaciones, territorios y formas de ejercer.</p>${link('participa','Explora cómo participar ↗','button')}</div><div>${[['01','Hacer visible','Dar espacio a diversas prácticas y trayectorias profesionales.'],['02','Compartir saberes','Imaginar encuentros, mentorías y aprendizajes colectivos.'],['03','Tejer conexiones','Acercar personas, ideas y oportunidades de colaboración.']].map(x=>`<div class="feature"><span class="number">${x[0]}</span><div><h3>${x[1]}</h3><p>${x[2]}</p></div></div>`).join('')}</div></div></section><section class="wrap"><div class="section-heading"><div><p class="eyebrow">Editorial / Publicaciones de demostración</p><h2>Ideas que nos encuentran.</h2></div>${link('editorial','Explorar Editorial ↗')}</div><div class="grid">${D.publications.slice(0,3).map(publicationCard).join('')}</div></section><section class="wrap"><div class="section-heading"><div><p class="eyebrow">Agenda imaginada</p><h2>Próximos encuentros.</h2></div>${link('agenda','Explorar agenda ↗')}</div>${eventRow(D.events[0])}</section>`;}
+function home(){return `<section class="hero"><div class="hero-copy"><p class="eyebrow">Arquitectura · Comunidad · Conexiones</p><h1>Un espacio para<br><em>construir juntas.</em></h1><p class="lead">Conectamos miradas, compartimos experiencias y damos lugar a nuevas posibilidades en la arquitectura.</p><div class="actions">${link('directorio','Conoce a las arquitectas ↗','button')}${link('voces','Sus Voces','button secondary')}${link('proyectos','Sus Proyectos','button secondary')}</div><p class="micro">Una comunidad por imaginar. Una maqueta para explorar.</p></div><div class="hero-art"><img src="assets/patio.svg" alt="Ilustración arquitectónica de un patio con arcos, vegetación y luz cálida" width="800" height="800"><video class="hero-video" src="assets/video_inicio.mp4" poster="assets/patio.svg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><div class="art-caption">${link('comunidad','01 / HABITAR EL ENCUENTRO ↗')}<span>Ilustración conceptual · Demo</span></div></div></section><div class="strip"><span>Miradas diversas</span><span>Conocimiento compartido</span><span>Conexiones que crecen</span></div><section class="wrap"><div class="section-heading"><div><p class="eyebrow">El valor de encontrarnos</p><h2>Distintas trayectorias.<br>Un horizonte compartido.</h2></div><p class="lead">Un lugar para visibilizar el trabajo de arquitectas y explorar nuevas formas de colaboración.</p></div><div class="grid">${D.people.slice(0,3).map(personCard).join('')}</div><div class="actions">${link('directorio','Explorar el directorio completo →','button secondary')}</div></section><section class="band"><div class="wrap split"><div><p class="eyebrow">Somos espacio</p><h2>La arquitectura crece<br>cuando se comparte.</h2><p>Imaginamos una red que abra conversaciones entre generaciones, territorios y formas de ejercer.</p>${link('participa','Explora cómo participar ↗','button')}</div><div>${[['01','Hacer visible','Dar espacio a diversas prácticas y trayectorias profesionales.'],['02','Compartir saberes','Imaginar encuentros, mentorías y aprendizajes colectivos.'],['03','Tejer conexiones','Acercar personas, ideas y oportunidades de colaboración.']].map(x=>`<div class="feature"><span class="number">${x[0]}</span><div><h3>${x[1]}</h3><p>${x[2]}</p></div></div>`).join('')}</div></div></section><section class="wrap"><div class="section-heading"><div><p class="eyebrow">Editorial / Publicaciones de demostración</p><h2>Ideas que nos encuentran.</h2></div>${link('editorial','Explorar Editorial ↗')}</div><div class="grid">${D.publications.slice(0,3).map(publicationCard).join('')}</div></section><section class="wrap"><div class="section-heading"><div><p class="eyebrow">Agenda imaginada</p><h2>Próximos encuentros.</h2></div>${link('agenda','Explorar agenda ↗')}</div>${eventRow(D.events[0])}</section>`;}
 function directory(){return shell(heading('Directorio / Perfiles ficticios','Talento que conecta.','Explora distintas miradas de la arquitectura. Busca por nombre, ciudad o especialidad.')+`<form class="filters" id="filters" role="search"><label>Buscar arquitecta<input id="search" type="search" placeholder="Nombre, ciudad o especialidad" autocomplete="off"></label><label>Ciudad<select id="city"><option value="">Todas las ciudades</option>${[...new Set(D.people.map(p=>p.city))].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Especialidad<select id="field"><option value="">Todas las especialidades</option>${[...new Set(D.people.map(p=>p.field))].map(x=>`<option>${x}</option>`).join('')}</select></label><button type="reset" class="small">Limpiar</button></form><p id="count" class="count" role="status"></p><div class="grid" id="results"></div>`);}
 function profile(id) {
   const p = D.people.find(p => p.id === id);
@@ -86,6 +86,37 @@ function initEditorialFilters() {
   form.addEventListener('reset', () => setTimeout(update, 0));
   update();
 }
+// Listados temáticos: reutilizan los detalles editoriales y sus identificadores.
+function collectionItems(page) {
+  return D.publications.filter(p => page === 'voces' ? p.format === 'Podcast' : p.themes.includes('Proyectos'));
+}
+function collectionPage(page) {
+  const title = page === 'voces' ? 'Sus Voces' : 'Sus Proyectos';
+  const description = page === 'voces' ? 'Todos los podcasts de la comunidad. Explora por arquitecta y tema.' : 'Publicaciones sobre proyectos. Explora por arquitecta y tema.';
+  return shell(crumb('inicio', 'Inicio') + heading('Contenidos de demostración', title, description) +
+    `<form class="filters editorial-filters" id="collection-filters" aria-label="Filtros de ${title}">
+      <label>Arquitecta<select id="architect"><option value="">Todas las arquitectas</option>
+        ${D.people.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
+        <option value="unassigned">Sin arquitecta asignada</option></select></label>
+      <label>Tema<select id="topic"><option value="">Todos los temas</option>
+        ${D.themes.map(t => `<option>${t}</option>`).join('')}</select></label>
+      <button type="reset" class="small">Limpiar filtros</button>
+    </form><p id="collection-count" class="count" role="status"></p><div class="grid" id="collection-results"></div>`);
+}
+function initCollectionFilters(page) {
+  const items = collectionItems(page), form = document.querySelector('#collection-filters');
+  function update() {
+    const architect = form.querySelector('#architect').value, topic = form.querySelector('#topic').value;
+    const found = items.filter(p => (!architect || (architect === 'unassigned' ? !p.architectIds?.length : p.architectIds?.includes(architect))) && (!topic || p.themes.includes(topic)));
+    document.querySelector('#collection-count').textContent = `${found.length} de ${items.length} ${page === 'voces' ? 'podcasts' : 'publicaciones sobre proyectos'}`;
+    document.querySelector('#collection-results').innerHTML = found.length ? found.map(p => `<article>${publicationCard(p)}<p class="micro">${(p.architectIds || []).map(id => D.people.find(person => person.id === id)?.name).filter(Boolean).join(', ') || 'Sin arquitecta asignada'}</p></article>`).join('') :
+      '<div class="empty"><h2>No encontramos contenidos.</h2><p>Prueba otra arquitecta o tema, o limpia los filtros.</p></div>';
+  }
+  form.addEventListener('change', update);
+  form.addEventListener('submit', e => e.preventDefault());
+  form.addEventListener('reset', () => setTimeout(update, 0));
+  update();
+}
 function missing(){return shell(heading('Contenido no encontrado','Volvamos a encontrarnos.')+link('inicio','Volver al inicio','button'));}
 function render() {
   if (location.hash === '#main') { main.focus(); return; }
@@ -96,6 +127,8 @@ function render() {
     case 'comunidad': html = community(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
+    case 'voces':
+    case 'proyectos': html = collectionPage(page); break;
     case 'editorial': html = editorial(); break;
     case 'publicacion': html = publication(id); break;
     case 'agenda':
@@ -120,7 +153,7 @@ function render() {
   main.innerHTML = html;
   nav.classList.remove('open');
   menu.setAttribute('aria-expanded', 'false');
-  const activePage = page === 'contacto' && !id ? 'comunidad' : {perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
+  const activePage = page === 'contacto' && !id ? 'comunidad' : {voces:'editorial', proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
   nav.querySelectorAll('a').forEach(a => {
     if (a.hash === '#/' + activePage) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');
@@ -131,6 +164,7 @@ function render() {
   if (page === 'inicio') initHeroVideo();
   if (page === 'directorio') initFilters();
   if (page === 'editorial') initEditorialFilters();
+  if (page === 'voces' || page === 'proyectos') initCollectionFilters(page);
   if (document.querySelector('#demo-form')) initForm();
   if (document.querySelector('#publication-video')) initVideo();
   if (document.querySelector('#editorial-participation')) participation.mount(id);
