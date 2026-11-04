@@ -1,12 +1,12 @@
 /* Datos exclusivamente ficticios. Sin llamadas a servicios externos. */
 window.DEMO = {
   people: [
-    {id:'elena-rios',name:'Elena Ríos',city:'Santiago',field:'Vivienda',initials:'ER',color:'#8DC6FF',bio:'Explora formas de habitar que conectan la vida cotidiana, la luz natural y los materiales de proximidad.'},
-    {id:'ines-valle',name:'Inés Valle',city:'Valparaíso',field:'Patrimonio',initials:'IV',color:'#8DC6FF',bio:'Trabaja en la recuperación de espacios existentes desde una mirada sensible a la memoria y al territorio.'},
-    {id:'amalia-sur',name:'Amalia Sur',city:'Concepción',field:'Paisajismo',initials:'AS',color:'#8DC6FF',bio:'Investiga el encuentro entre paisaje y ciudad a través de espacios colectivos de pequeña escala.'},
-    {id:'clara-monte',name:'Clara Monte',city:'Santiago',field:'Interiorismo',initials:'CM',color:'#8DC6FF',bio:'Diseña interiores flexibles donde la materialidad y los detalles acompañan nuevas maneras de trabajar.'},
-    {id:'julia-lago',name:'Julia Lago',city:'Valdivia',field:'Vivienda',initials:'JL',color:'#8DC6FF',bio:'Desarrolla propuestas de vivienda vinculadas al clima, la madera y los paisajes del sur.'},
-    {id:'luisa-prado',name:'Luisa Prado',city:'Valparaíso',field:'Paisajismo',initials:'LP',color:'#8DC6FF',bio:'Propone espacios de encuentro y jardines que invitan al cuidado compartido de nuestro entorno.'}
+    {id:'elena-rios',name:'Elena Ríos',city:'Santiago',field:'Vivienda',initials:'ER',color:'#A7E3DD',bio:'Explora formas de habitar que conectan la vida cotidiana, la luz natural y los materiales de proximidad.'},
+    {id:'ines-valle',name:'Inés Valle',city:'Valparaíso',field:'Patrimonio',initials:'IV',color:'#A7E3DD',bio:'Trabaja en la recuperación de espacios existentes desde una mirada sensible a la memoria y al territorio.'},
+    {id:'amalia-sur',name:'Amalia Sur',city:'Concepción',field:'Paisajismo',initials:'AS',color:'#A7E3DD',bio:'Investiga el encuentro entre paisaje y ciudad a través de espacios colectivos de pequeña escala.'},
+    {id:'clara-monte',name:'Clara Monte',city:'Santiago',field:'Interiorismo',initials:'CM',color:'#A7E3DD',bio:'Diseña interiores flexibles donde la materialidad y los detalles acompañan nuevas maneras de trabajar.'},
+    {id:'julia-lago',name:'Julia Lago',city:'Valdivia',field:'Vivienda',initials:'JL',color:'#A7E3DD',bio:'Desarrolla propuestas de vivienda vinculadas al clima, la madera y los paisajes del sur.'},
+    {id:'luisa-prado',name:'Luisa Prado',city:'Valparaíso',field:'Paisajismo',initials:'LP',color:'#A7E3DD',bio:'Propone espacios de encuentro y jardines que invitan al cuidado compartido de nuestro entorno.'}
   ],
   editorialParticipation: {
     'colaborar': {reactions:12, comments:[
