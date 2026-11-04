@@ -153,7 +153,7 @@ function render() {
   main.innerHTML = html;
   nav.classList.remove('open');
   menu.setAttribute('aria-expanded', 'false');
-  const activePage = page === 'contacto' && !id ? 'comunidad' : {voces:'editorial', proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
+  const activePage = page === 'contacto' && !id ? 'comunidad' : {proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
   nav.querySelectorAll('a').forEach(a => {
     if (a.hash === '#/' + activePage) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');
