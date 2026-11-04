@@ -1,0 +1,58 @@
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener main
+        uses: actions/checkout@v6
+        with:
+          ref: refs/heads/main
+          path: main
+          persist-credentials: false
+
+      - name: Obtener develop
+        uses: actions/checkout@v6
+        with:
+          ref: refs/heads/develop
+          path: develop
+          persist-credentials: false
+
+      - name: Preparar ambas versiones
+        shell: bash
+        run: |
+          mkdir -p _site/pruebas
+          cp -R main/{index.html,assets,css,data,js} _site/
+          cp -R develop/{index.html,assets,css,data,js} _site/pruebas/
+
+      - name: Subir artefacto de Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar en Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
