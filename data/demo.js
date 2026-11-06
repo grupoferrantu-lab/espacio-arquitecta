@@ -1,7 +1,33 @@
 /* Datos exclusivamente ficticios. Sin llamadas a servicios externos. */
 window.DEMO = {
   people: [
-    {id:'elena-rios',name:'Elena Ríos',city:'Santiago',field:'Vivienda',initials:'ER',color:'#A7E3DD',bio:'Explora formas de habitar que conectan la vida cotidiana, la luz natural y los materiales de proximidad.'},
+    {
+      id: 'pamela-goicovich',
+      name: 'Pamela Goicovich',
+      city: 'Santiago',
+      field: 'Cálculo estructural',
+      photo: 'assets/pamela-goicovich.jpg',
+      bio: 'Arquitecta, calculista estructural y MSc en Dirección y Desarrollo de Proyectos de Alta Complejidad.',
+      career: [
+        ['Cargos y áreas de trabajo', [
+          'Presidenta de Empresas Grupo Goico.',
+          'CEO de Sello Life Minerales Críticos.',
+          'Gestión de negocios, fondos de inversión, desarrollo de proyectos de alta complejidad y asesorías legales.'
+        ]],
+        ['Dirección de empresas', [
+          'Goicovich AIC Constructora',
+          'Talleres Goico / Blindaje',
+          'Goico Group Consultora',
+          'Lavin Abogados y Consultores',
+          'Agencia de Aduanas Seguel, República de Chile'
+        ]],
+        ['Participación sectorial', [
+          'WINS',
+          'WIM Innovación',
+          'Presidenta del directorio de la Cámara Internacional del Litio y Energías, Asociación CIL Lithium.'
+        ]]
+      ]
+    },
     {id:'ines-valle',name:'Inés Valle',city:'Valparaíso',field:'Patrimonio',initials:'IV',color:'#A7E3DD',bio:'Trabaja en la recuperación de espacios existentes desde una mirada sensible a la memoria y al territorio.'},
     {id:'amalia-sur',name:'Amalia Sur',city:'Concepción',field:'Paisajismo',initials:'AS',color:'#A7E3DD',bio:'Investiga el encuentro entre paisaje y ciudad a través de espacios colectivos de pequeña escala.'},
     {id:'clara-monte',name:'Clara Monte',city:'Santiago',field:'Interiorismo',initials:'CM',color:'#A7E3DD',bio:'Diseña interiores flexibles donde la materialidad y los detalles acompañan nuevas maneras de trabajar.'},
@@ -71,7 +97,7 @@ window.DEMO = {
   },
   {
     "id": "casa-patio",
-    "architectIds": ["elena-rios"],
+    "architectIds": [],
     "title": "La casa que mira hacia adentro",
     "format": "Artículo escrito",
     "themes": [
@@ -82,7 +108,7 @@ window.DEMO = {
     "alt": "Ilustración conceptual de Casa Patio, vivienda ficticia",
     "text": "Un patio organiza la vida de esta vivienda imaginaria en Santiago.",
     "body": [
-      "Casa Patio · Vivienda ficticia · Santiago. Mirada profesional ilustrativa de Elena Ríos.",
+      "Casa Patio · Vivienda ficticia · Santiago.",
       "Los recorridos, las sombras y una secuencia de umbrales proponen una relación pausada con el exterior. La propuesta conceptual explora la luz natural y los materiales de proximidad.",
       "Esta publicación es un ejercicio editorial; no corresponde a una obra construida ni acredita un desempeño ambiental."
     ]

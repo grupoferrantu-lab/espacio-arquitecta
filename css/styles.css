@@ -24,3 +24,17 @@ nav a[aria-current=page] { border-bottom-color: #69C2BD; }
 @media (max-width: 720px) {
   header .brand img { width: 52px; height: 52px; border-radius: 50%; }
 }
+
+.card .person-photo {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  margin-bottom: 23px;
+}
+.profile-photo {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  justify-self: center;
+}
