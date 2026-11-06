@@ -1,0 +1,50 @@
+flowchart TD
+    MENU["Menú principal · En todas las páginas"]
+    MENU --> I["Inicio"]
+    MENU --> C["Comunidad"]
+    MENU --> D["Directorio"]
+    MENU --> A["Agenda"]
+    MENU --> E["Editorial"]
+    MENU --> S["Ser parte"]
+
+    I --> D
+    I --> C
+    I --> S
+    I --> E
+    I --> PF["Ficha profesional"]
+    I --> AC["Detalle de actividad"]
+    I --> PUB["Detalle de publicación"]
+
+    C --> D
+    C --> A
+    C --> E
+    C --> CTG["Contáctanos · Contacto demostrativo general"]
+    CTG --> CF
+
+    D --> PF
+    PF --> CT["Contacto demostrativo"]
+    A --> AC
+    AC --> IN["Inscripción demostrativa"]
+    AC --> D
+
+    E --> PUB
+    subgraph PARTICIPACION["Dentro de cada publicación · Interacciones demostrativas"]
+        MG["Me gusta · Activar o retirar"]
+        LC["Leer comentarios ficticios y de prueba"]
+        EC["Escribir y publicar comentario · Validación"]
+        TOTAL["Contadores de reacciones y comentarios"]
+        MG --> TOTAL
+        EC --> LC
+        EC --> TOTAL
+    end
+    PUB --> MG
+    PUB --> LC
+    PUB --> EC
+
+    S --> CF["Confirmación de prueba · Sin envío"]
+    CT --> CF
+    IN --> CF
+
+    FOOT["Pie de todas las páginas · Redes sociales"] --> IG["Instagram · Enlace externo"]
+    FOOT --> SP["Spotify · Enlace externo"]
+    FOOT --> LI["LinkedIn · Enlace externo"]
