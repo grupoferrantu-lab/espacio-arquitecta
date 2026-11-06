@@ -110,7 +110,10 @@ function collectionItems(page) {
 function collectionPage(page) {
   const title = page === 'voces' ? 'Sus Voces' : 'Sus Proyectos';
   const description = page === 'voces' ? 'Todos los podcasts de la comunidad. Explora por arquitecta y tema.' : 'Publicaciones sobre proyectos. Explora por arquitecta y tema.';
-  return shell(crumb('inicio', 'Inicio') + heading('Contenidos de demostración', title, description) +
+  const podcastLink = page === 'voces'
+    ? '<p><a class="button" href="https://open.spotify.com/show/2gKyb8o620HxBYZ4spyAE0">Escuchar Espacio Arquitecta en Spotify ↗</a></p>'
+    : '';
+  return shell(crumb('inicio', 'Inicio') + heading('Contenidos de demostración', title, description) + podcastLink +
     `<form class="filters editorial-filters" id="collection-filters" aria-label="Filtros de ${title}">
       <label>Arquitecta<select id="architect"><option value="">Todas las arquitectas</option>
         ${D.people.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
