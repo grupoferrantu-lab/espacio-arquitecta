@@ -38,3 +38,9 @@ nav a[aria-current=page] { border-bottom-color: #69C2BD; }
   height: auto;
   justify-self: center;
 }
+
+/* Identidad visual EA 2026: calipso, blanco y negro. */
+:root{--accent:#9CE9E0;--primary:#162326;--paper:#FFFFFF;--ink:#161A1B;--accent-ink:#162326;--line:#D7E5E3;--muted:#334448;--sage:#E8F7F5}
+header .brand img{width:clamp(170px,19vw,235px);height:auto}
+footer .brand img{width:155px;height:auto}
+@media(max-width:720px){header .brand img{width:52px;height:52px;border-radius:50%}}
