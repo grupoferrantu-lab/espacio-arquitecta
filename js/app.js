@@ -117,6 +117,22 @@ function initCollectionFilters(page) {
   form.addEventListener('reset', () => setTimeout(update, 0));
   update();
 }
+function services() {
+  const offerings = [
+    ['Talleres de mentoría', 'Comparte experiencias con otras arquitectas y define próximos pasos para tu trayectoria profesional.'],
+    ['Coaching profesional', 'Trabaja objetivos de carrera, comunicación y liderazgo a partir de desafíos concretos de tu práctica.'],
+    ['Cursos', 'Explora formación práctica en herramientas de diseño, gestión de proyectos y comunicación visual.'],
+    ['Encuentros de intercambio', 'Conversa con otras profesionales sobre sus proyectos y formas de ejercer la arquitectura.']
+  ];
+  return shell(
+    heading('Servicios', 'Formación y acompañamiento profesional',
+      'Explora propuestas para aprender, compartir experiencias y fortalecer tu práctica en arquitectura.') +
+    '<p class="notice">Servicios de demostración. Sin fechas ni inscripciones vigentes.</p>' +
+    '<div class="grid">' + offerings.map(([title, description]) =>
+      `<article class="person"><h2>${title}</h2><p>${description}</p></article>`
+    ).join('') + '</div>'
+  );
+}
 function missing(){return shell(heading('Contenido no encontrado','Volvamos a encontrarnos.')+link('inicio','Volver al inicio','button'));}
 function render() {
   if (location.hash === '#main') { main.focus(); return; }
@@ -125,6 +141,7 @@ function render() {
   switch (page) {
     case 'inicio': html = home(); break;
     case 'comunidad': html = community(); break;
+    case 'servicios': html = services(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
     case 'voces':
