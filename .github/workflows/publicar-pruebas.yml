@@ -1,0 +1,46 @@
+name: Publicar rama develop en sitio de pruebas
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-pruebas
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener rama principal
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: principal
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Obtener rama de desarrollo
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          path: desarrollo
+      - name: Copiar maqueta a carpeta pruebas
+        run: |
+          mkdir -p principal/pruebas
+          rsync -a --delete --exclude='.git' --exclude='.github' --exclude='pruebas' --exclude='README.md' desarrollo/ principal/pruebas/
+      - name: Guardar publicación de pruebas
+        working-directory: principal
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pruebas/
+          if git diff --cached --quiet; then
+            echo "No hay cambios que publicar"
+          else
+            git commit -m "Publicar maqueta develop en /pruebas"
+            git push origin HEAD:main
+          fi
