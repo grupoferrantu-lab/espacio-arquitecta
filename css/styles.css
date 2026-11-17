@@ -69,3 +69,15 @@ nav{gap:18px}
 nav a{font-weight:700}
 @media(max-width:1100px){header{flex-wrap:wrap}nav{flex-wrap:wrap;gap:14px}}
 @media(max-width:720px){header .brand img{width:80px;height:80px}nav{gap:0}}
+
+/* Indicador separado del texto y submenú Ser parte. */
+nav a[aria-current=page]{border-bottom:0;box-shadow:none;text-decoration:underline;text-decoration-color:var(--accent-ink);text-decoration-thickness:2px;text-underline-offset:9px}
+.join-menu{position:relative;flex-shrink:0}
+.join-menu summary{list-style:none;font-size:13px;font-weight:700;cursor:pointer;padding:10px 0}
+.join-menu summary::-webkit-details-marker{display:none}
+.join-menu summary::after{content:"⌄";margin-left:8px}
+.join-menu[open] summary::after{content:"⌃"}
+.join-submenu{position:absolute;right:0;top:100%;z-index:30;min-width:220px;background:var(--paper);border:1px solid var(--line);padding:10px 0;box-shadow:0 8px 20px #16232615}
+.join-submenu a{display:block;padding:12px 20px;white-space:nowrap}
+.join-submenu a:hover,.join-submenu a:focus-visible{background:var(--sage)}
+@media(max-width:720px){.join-menu{width:100%}.join-menu summary{padding:12px;font-size:15px;border-top:1px solid var(--line)}.join-submenu{position:static;min-width:0;box-shadow:none}.join-submenu a{white-space:normal}}
