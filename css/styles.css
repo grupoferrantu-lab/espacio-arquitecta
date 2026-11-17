@@ -4,7 +4,7 @@
 .editorial-filters{grid-template-columns:1fr 1fr auto;max-width:none}.editorial-filters label{margin-bottom:0}.publication-body{margin-top:35px}.publication-topics .tag{margin-right:6px}.meta-label{font-size:12px;margin-right:10px}@media(max-width:720px){.editorial-filters{grid-template-columns:1fr}}
 
 /* Paleta: fondo blanco, azules y superficies claras. Las imágenes conservan sus colores originales. */
-.hero h1 em{background:linear-gradient(transparent 76%,var(--accent) 76%)}
+.hero h1 em{background:none}
 input[type=checkbox]{accent-color:#1F2D3D}
 nav a[aria-current=page]{box-shadow:inset 0 -7px 0 var(--accent)}
 
