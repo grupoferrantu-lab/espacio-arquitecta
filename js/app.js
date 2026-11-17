@@ -45,19 +45,19 @@ function profile(id) {
 }
 function formPage(kind,id){let target=D.people.find(x=>x.id===id),event=D.events.find(x=>x.id===id);const title=kind==='participa'?'Hay lugar para tu mirada.':kind==='inscripcion'?'Imaginemos el próximo encuentro.':'Conversemos.';return shell(crumb('comunidad','Comunidad')+heading('Formulario de demostración',title,'Prueba el recorrido con datos inventados. Esta maqueta no envía ni almacena información.')+`<p class="notice">${target?'Contacto de prueba con '+target.name+'. ':kind==='contacto'?'Contacto de prueba con Espacio Arquitecta. ':event?'Actividad ficticia: '+event.title+'. ':''}No se crea una cuenta, inscripción ni solicitud real. No introduzcas datos personales reales.</p><form id="demo-form" novalidate><div class="form-grid"><label>Nombre ficticio<input name="nombre" aria-label="Nombre ficticio" required minlength="2" maxlength="80" autocomplete="off" placeholder="Ej.: Andrea Demo" aria-describedby="err-nombre"><span class="error" id="err-nombre"></span></label><label>Correo ficticio<input name="correo" aria-label="Correo ficticio" type="email" required maxlength="150" autocomplete="off" placeholder="andrea@example.com" aria-describedby="err-correo"><span class="error" id="err-correo"></span></label></div><label>Interés<select name="interes" aria-label="Interés" required aria-describedby="err-interes"><option value="">Selecciona una opción</option><option>Conocer la comunidad</option><option>Explorar colaboración</option><option>Mentorías (posibilidad futura)</option><option>Actividad demostrativa</option></select><span class="error" id="err-interes"></span></label><label>Mensaje ficticio<textarea name="mensaje" aria-label="Mensaje ficticio" required minlength="10" maxlength="1000" placeholder="Escribe al menos 10 caracteres de prueba." aria-describedby="err-mensaje"></textarea><span class="error" id="err-mensaje"></span></label><label class="check"><input name="demo" aria-label="Entiendo que es una demostración y usaré datos inventados." type="checkbox" required aria-describedby="err-demo">Entiendo que es una demostración y usaré datos inventados.<span class="error" id="err-demo"></span></label><button type="submit">Probar validación ↗</button> <button type="reset">Limpiar</button><div id="form-status" role="status" tabindex="-1" hidden></div></form>`);}
 function community() {
-  return shell(heading('Comunidad', 'Más miradas.<br>Más posibilidades.',
-    'Espacio Arquitecta se presenta en esta maqueta como una comunidad profesional para encontrarse, visibilizar experiencias y compartir conocimiento.') + notice + `
-    <div class="split"><img class="wide-image" src="assets/taller.svg"
-      alt="Ilustración de un espacio de trabajo compartido" width="600" height="450">
-      <div><h2>Un espacio en construcción colectiva.</h2>
-        <p>La propuesta reúne un directorio de profesionales, una agenda de encuentros y un espacio editorial. Su propósito en esta etapa es conversar sobre qué aporta valor a la comunidad.</p>
-        <p>La identidad, los criterios de participación y los servicios definitivos requieren validación con la clienta.</p>
-        ${link('contacto', 'Contáctanos', 'button')}</div></div>
-    <h2 style="margin-top:55px">Conoce las posibilidades</h2><div class="grid">
-    ${[['directorio','Conectar','Explora perfiles profesionales ficticios.'],
-      ['agenda','Aprender','Descubre propuestas ilustrativas de encuentros.'],
-      ['editorial','Compartir','Explora publicaciones en distintos formatos y temáticas.']]
-      .map(x => `<a class="person card" href="#/${x[0]}"><h3>${x[1]} ↗</h3><p>${x[2]}</p></a>`).join('')}</div>`);
+  return shell(heading('ESPACIOaRQUITECTA', 'Quienes somos') + `
+    <div class="prose">
+      <p>ESPACIOaRQUITECTA nació como un podcast para escuchar las voces de mujeres vinculadas a la arquitectura: arquitectas, abogadas, agrónomas, ingenieras, que desde distintas disciplinas apuestan por un futuro sostenible. En cada conversación apareció un hilo común, ese “algo más” que une a todas: una mirada sistémica, colaboración, sensibilidad social y urbana, e innovación.</p>
+      <p>Hoy damos el siguiente paso. ESPACIOaRQUITECTA LAB es una plataforma digital de colaboración, aprendizaje y encuentro para visibilizar el trabajo y la creatividad de las arquitectas de América, y para conectarlas entre sí.</p>
+      <h2>Nuestra mirada</h2>
+      <p>Creemos que los liderazgos de mujeres en arquitectura y construcción conectan: escuchan a los habitantes y a los contextos, cuidan la naturaleza, integran las sensibilidades culturales a las normativas y respetan la diversidad de comunidades y ciudades.</p>
+      <h2>Nuestro propósito</h2>
+      <p>Una plataforma de colaboración, aprendizaje, encuentro y visibilización. La forma de la solución todavía está abierta, y la construimos con la comunidad.</p>
+      <h2>Quién la impulsa</h2>
+      <p>Ana María [apellido], arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y en la concesión de proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
+      <h2>Frase final</h2>
+      <p><em>Por un mundo donde las arquitectas no solo egresan, sino que lideran, crean y dejan huella.</em></p>
+    </div>`);
 }
 
 function editorial() {
