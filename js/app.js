@@ -14,7 +14,7 @@ const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p>
 const shell=html=>`<section class="wrap">${html}</section>`;
 const crumb=(path,label)=>`<div class="breadcrumb">${link('inicio','Inicio')} / ${link(path,label)}</div>`;
 function home(){return `<section class="hero"><div class="hero-copy"><p class="eyebrow">Arquitectura · Comunidad · Conexiones</p><h1>Un espacio para<br><em>construir juntas.</em></h1><p class="lead">Conectamos miradas, compartimos experiencias y damos lugar a nuevas posibilidades en la arquitectura.</p><div class="actions">${link('directorio','Conoce a las arquitectas ↗','button')}${link('voces','Sus Voces','button secondary')}${link('proyectos','Sus Proyectos','button secondary')}</div><p class="micro">Una comunidad por imaginar. Una maqueta para explorar.</p></div><div class="hero-art"><img src="assets/patio.svg" alt="Ilustración arquitectónica de un patio con arcos, vegetación y luz cálida" width="800" height="800"><video class="hero-video" src="assets/video_inicio.mp4" poster="assets/patio.svg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><div class="art-caption">${link('comunidad','DESCUBRE EL ESPACIO')}<span>Ilustración conceptual · Demo</span></div></div></section><div class="strip"><span>Miradas diversas</span><span>Conocimiento compartido</span><span>Conexiones que crecen</span></div>`;}
-function directory(){return shell(heading('Directorio / Perfiles','Conoce a nuestras arquitectas','Explora sus distintas miradas de la arquitectura. Busca por nombre, ciudad o especialidad')+`<form class="filters" id="filters" role="search"><label>Buscar arquitecta<input id="search" type="search" placeholder="Nombre, ciudad o especialidad" autocomplete="off"></label><label>Ciudad<select id="city"><option value="">Todas las ciudades</option>${[...new Set(D.people.map(p=>p.city))].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Especialidad<select id="field"><option value="">Todas las especialidades</option>${[...new Set(D.people.map(p=>p.field))].map(x=>`<option>${x}</option>`).join('')}</select></label><button type="reset" class="small">Limpiar</button></form><p id="count" class="count" role="status"></p><div class="grid" id="results"></div>`);}
+function directory(){return shell(heading('Arquitectas y Obras','Conoce a nuestras arquitectas','Explora sus distintas miradas de la arquitectura. Busca por nombre, ciudad o especialidad')+`<form class="filters" id="filters" role="search"><label>Buscar arquitecta<input id="search" type="search" placeholder="Nombre, ciudad o especialidad" autocomplete="off"></label><label>Ciudad<select id="city"><option value="">Todas las ciudades</option>${[...new Set(D.people.map(p=>p.city))].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Especialidad<select id="field"><option value="">Todas las especialidades</option>${[...new Set(D.people.map(p=>p.field))].map(x=>`<option>${x}</option>`).join('')}</select></label><button type="reset" class="small">Limpiar</button></form><p id="count" class="count" role="status"></p><div class="grid" id="results"></div>`);}
 function profile(id) {
   const p = D.people.find(p => p.id === id);
   if (!p) return missing();
@@ -145,7 +145,7 @@ function services() {
     ['Encuentros de intercambio', 'Conversa con otras profesionales sobre sus proyectos y formas de ejercer la arquitectura.']
   ];
   return shell(
-    heading('Servicios', 'Formación y acompañamiento profesional',
+    heading('Espacio ArquitectaLAB', 'Formación y acompañamiento profesional',
       'Explora propuestas para aprender, compartir experiencias y fortalecer tu práctica en arquitectura.') +
     '<p class="notice">Servicios de demostración. Sin fechas ni inscripciones vigentes.</p>' +
     '<div class="grid">' + offerings.map(([title, description]) =>
@@ -168,6 +168,7 @@ function render() {
     case 'proyectos': html = collectionPage(page); break;
     case 'editorial': html = editorial(); break;
     case 'publicacion': html = publication(id); break;
+    case 'avisos': html = shell(heading('Comunidad', 'Avisos', 'No hay avisos publicados por el momento.')); break;
     case 'agenda':
       html = shell(heading('Agenda / Actividades ficticias', 'Encontrarnos abre caminos.',
         'Fechas ilustrativas, sin convocatoria vigente ni inscripciones reales. Año de referencia: 2026.') + notice + D.events.map(eventRow).join(''));
