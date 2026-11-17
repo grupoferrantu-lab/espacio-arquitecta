@@ -52,8 +52,8 @@ strong,b,.brand strong,.eyebrow,label,.error,.comment-author{color:var(--bold-te
 .check{color:var(--ink)}
 h1,h2,h3,h4,h5,h6,.hero h1 em{color:var(--heading-text)}
 
-/* Portada: texto y video centrados verticalmente, con el video completo. */
-.hero{align-items:center;max-width:1280px;margin-inline:auto}
-.hero-art{align-self:center;min-height:0;aspect-ratio:16/10;margin:40px 32px 40px 0}
-.hero-art .hero-video{object-fit:contain}
-@media(max-width:720px){.hero-art{margin:0 6% 32px;aspect-ratio:16/10}}
+/* Portada: video amplio a la derecha y texto centrado verticalmente. */
+.hero{align-items:center}
+.hero-art{align-self:stretch;min-height:620px;margin:0}
+.hero-art .hero-video{object-fit:cover}
+@media(max-width:720px){.hero-art{min-height:420px;margin:0}}
