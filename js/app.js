@@ -54,9 +54,7 @@ function community() {
       <h2>Nuestro propósito</h2>
       <p>Una plataforma de colaboración, aprendizaje, encuentro y visibilización. La forma de la solución todavía está abierta, y la construimos con la comunidad.</p>
       <h2>Quién la impulsa</h2>
-      <p>Ana María [apellido], arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y en la concesión de proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
-      <h2>Frase final</h2>
-      <p><em>Por un mundo donde las arquitectas no solo egresan, sino que lideran, crean y dejan huella.</em></p>
+      <p>Ana María Torres, arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
     </div>`);
 }
 
