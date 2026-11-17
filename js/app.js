@@ -148,11 +148,34 @@ function services() {
     heading('Espacio ArquitectaLAB', 'Formación y acompañamiento profesional',
       'Explora propuestas para aprender, compartir experiencias y fortalecer tu práctica en arquitectura.') +
     '<p class="notice">Servicios de demostración. Sin fechas ni inscripciones vigentes.</p>' +
-    '<div class="grid">' + offerings.map(([title, description]) =>
+    link('servicios/mentoria', 'Mentoría y coaching ↗', 'button secondary') +
+    '<div class="grid" style="margin-top:32px">' + offerings.map(([title, description]) =>
       `<article class="person"><h2>${title}</h2><p>${description}</p></article>`
     ).join('') + '</div>'
   );
 }
+
+function memberships() {
+  return shell(heading('Espacio Arquitecta', 'Membresías', 'Distintas formas de crecer en comunidad y fortalecer tu trayectoria.') +
+    '<div class="grid">' +
+    '<article class="person"><h2>Membresía gratuita</h2><p>Perfil básico, acceso a la agenda y al podcast. Para crecer en comunidad.</p></article>' +
+    '<article class="person"><h2>Membresía de pago</h2><p>Perfil destacado con obras, acceso al LAB, descuentos en talleres y prioridad en convocatorias.</p></article>' +
+    '<article class="person"><h2>Mentoría y coaching</h2><p>Un servicio aparte dentro del LAB: sesiones individuales y programas grupales de pocas semanas, orientados a un resultado concreto.</p>' +
+    link('servicios/mentoria', 'Conoce Mentoría y coaching ↗', 'button secondary') + '</article>' +
+    '<article class="person"><h2>Publicidad y avisos</h2><p>Auspicios de empresas y colegios, y avisos de empleo o concursos.</p>' +
+    link('avisos', 'Ver avisos ↗', 'button secondary') + '</article></div>' +
+    '<p class="notice" style="margin-top:32px">Propuesta de membresías y servicios. Precios, fechas y condiciones por definir; todavía no hay contratación ni pagos habilitados.</p>');
+}
+function mentoring() {
+  return shell(crumb('servicios', 'Espacio ArquitectaLAB') +
+    heading('Espacio ArquitectaLAB', 'Mentoría y coaching', 'Acompañamiento práctico para avanzar hacia un resultado concreto.') +
+    '<p class="lead">Servicio aparte de las membresías, con sesiones individuales y programas grupales de pocas semanas.</p>' +
+    '<div class="grid"><article class="person"><h2>De egresada a primer proyecto</h2><p>Define los pasos para convertir tus conocimientos en un primer proyecto.</p></article>' +
+    '<article class="person"><h2>De profesional a liderazgo</h2><p>Trabaja un objetivo de liderazgo con pasos concretos para tu práctica profesional.</p></article></div>' +
+    '<p class="notice" style="margin-top:32px">Programas propuestos. Fechas, duración específica, precios y condiciones por definir.</p>' +
+    link('servicios', 'Volver al LAB →', 'button secondary'));
+}
+
 function missing(){return shell(heading('Contenido no encontrado','Volvamos a encontrarnos.')+link('inicio','Volver al inicio','button'));}
 function render() {
   if (location.hash === '#main') { main.focus(); return; }
@@ -161,7 +184,8 @@ function render() {
   switch (page) {
     case 'inicio': html = home(); break;
     case 'comunidad': html = community(); break;
-    case 'servicios': html = services(); break;
+    case 'servicios': html = id === 'mentoria' ? mentoring() : services(); break;
+    case 'membresias': html = memberships(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
     case 'voces':
