@@ -44,3 +44,51 @@ nav a[aria-current=page] { border-bottom-color: #69C2BD; }
 header .brand img{width:clamp(170px,19vw,235px);height:auto}
 footer .brand img{width:155px;height:auto}
 @media(max-width:720px){header .brand img{width:52px;height:52px;border-radius:50%}}
+
+/* Paleta solicitada: fondo, énfasis en negrita y encabezados. */
+:root{--paper:#E3F5F3;--bold-text:#26BEB7;--heading-text:#597878}
+body{background:var(--paper)}
+strong,b,.brand strong,.eyebrow,label,.error,.comment-author{color:var(--bold-text)}
+.check{color:var(--ink)}
+h1,h2,h3,h4,h5,h6,.hero h1 em{color:var(--heading-text)}
+
+/* Portada: video amplio a la derecha y texto centrado verticalmente. */
+.hero{align-items:center}
+.hero-art{align-self:stretch;min-height:620px;margin:0}
+.hero-art .hero-video{object-fit:cover}
+@media(max-width:720px){.hero-art{min-height:420px;margin:0}}
+
+/* Tipografía sans gruesa e identidad circular sin marco. */
+body{font-family:Arial,Helvetica,sans-serif;font-weight:600}
+h1,h2,h3,h4,h5,h6,.hero h1 em,.number,.avatar,.date strong,footer p{font-family:Arial,Helvetica,sans-serif;font-weight:800}
+strong,b,.eyebrow,label,.error,.comment-author{font-weight:800}
+header .brand{flex-shrink:0}
+header .brand img{width:112px;height:112px;border:0;border-radius:0}
+footer .brand img{border:0;border-radius:0}
+nav{gap:18px}
+nav a{font-weight:700}
+@media(max-width:1100px){header{flex-wrap:wrap}nav{flex-wrap:wrap;gap:14px}}
+@media(max-width:720px){header .brand img{width:80px;height:80px}nav{gap:0}}
+
+/* Indicador separado del texto y submenú Ser parte. */
+nav a[aria-current=page]{border-bottom:0;box-shadow:none;text-decoration:underline;text-decoration-color:var(--accent-ink);text-decoration-thickness:2px;text-underline-offset:9px}
+.join-menu{position:relative;flex-shrink:0}
+.join-menu summary{list-style:none;font-size:13px;font-weight:700;cursor:pointer;padding:10px 0}
+.join-menu summary::-webkit-details-marker{display:none}
+.join-menu summary::after{content:"⌄";margin-left:8px}
+.join-menu[open] summary::after{content:"⌃"}
+.join-submenu{position:absolute;right:0;top:100%;z-index:30;min-width:220px;background:var(--paper);border:1px solid var(--line);padding:10px 0;box-shadow:0 8px 20px #16232615}
+.join-submenu a{display:block;padding:12px 20px;white-space:nowrap}
+.join-submenu a:hover,.join-submenu a:focus-visible{background:var(--sage)}
+@media(max-width:720px){.join-menu{width:100%}.join-menu summary{padding:12px;font-size:15px;border-top:1px solid var(--line)}.join-submenu{position:static;min-width:0;box-shadow:none}.join-submenu a{white-space:normal}}
+
+/* Ser parte: botón gris verdoso con texto verde. */
+.join-menu summary{display:inline-flex;align-items:center;justify-content:center;background:#D7E5E3;color:#597878;border:1px solid #B8CECB;padding:10px 17px}
+.join-menu summary:hover,.join-menu[open] summary{background:#C5D9D6;color:#597878}
+@media(max-width:720px){.join-menu summary{width:auto;border:1px solid #B8CECB;margin-top:8px}}
+
+/* Menú principal y submenú con texto más legible. */
+nav a,.join-menu summary{font-size:16px}
+.join-submenu a{font-size:16px}
+@media(max-width:1100px){nav a,.join-menu summary{font-size:16px}}
+@media(max-width:720px){nav a,.join-menu summary{font-size:17px}}
