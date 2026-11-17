@@ -139,18 +139,14 @@ function initCollectionFilters(page) {
 }
 function services() {
   const offerings = [
-    ['Talleres de mentoría', 'Comparte experiencias con otras arquitectas y define próximos pasos para tu trayectoria profesional.'],
-    ['Coaching profesional', 'Trabaja objetivos de carrera, comunicación y liderazgo a partir de desafíos concretos de tu práctica.'],
-    ['Cursos', 'Explora formación práctica en herramientas de diseño, gestión de proyectos y comunicación visual.'],
-    ['Encuentros de intercambio', 'Conversa con otras profesionales sobre sus proyectos y formas de ejercer la arquitectura.']
+    ['Proyectos en conjunto', 'Convocatorias para formar equipos (concursos, licitaciones, proyectos complejos).'],
+    ['Mentorías y coaching', 'Un espacio para emparejar a quien empieza con quien ya tiene recorrido.'],
+    ['Encuentros', 'Charlas, talleres, clases, conversaciones abiertas como puerta de entrada.']
   ];
   return shell(
-    heading('Espacio ArquitectaLAB', 'Formación y acompañamiento profesional',
-      'Explora propuestas para aprender, compartir experiencias y fortalecer tu práctica en arquitectura.') +
-    '<p class="notice">Servicios de demostración. Sin fechas ni inscripciones vigentes.</p>' +
-    link('servicios/mentoria', 'Mentoría y coaching ↗', 'button secondary') +
-    '<div class="grid" style="margin-top:32px">' + offerings.map(([title, description]) =>
-      `<article class="person"><h2>${title}</h2><p>${description}</p></article>`
+    heading('Espacio ArquitectaLAB', 'Espacio ArquitectaLAB') +
+    '<div class="grid">' + offerings.map(([title, description], index) =>
+      `<article class="person"><h2>${title}</h2><p>${description}</p>${index === 1 ? link('servicios/mentoria', 'Conoce Mentorías y coaching ↗', 'button secondary') : ''}</article>`
     ).join('') + '</div>'
   );
 }
