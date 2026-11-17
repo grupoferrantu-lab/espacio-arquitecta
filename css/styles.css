@@ -81,3 +81,8 @@ nav a[aria-current=page]{border-bottom:0;box-shadow:none;text-decoration:underli
 .join-submenu a{display:block;padding:12px 20px;white-space:nowrap}
 .join-submenu a:hover,.join-submenu a:focus-visible{background:var(--sage)}
 @media(max-width:720px){.join-menu{width:100%}.join-menu summary{padding:12px;font-size:15px;border-top:1px solid var(--line)}.join-submenu{position:static;min-width:0;box-shadow:none}.join-submenu a{white-space:normal}}
+
+/* Ser parte: botón gris verdoso con texto verde. */
+.join-menu summary{display:inline-flex;align-items:center;justify-content:center;background:#D7E5E3;color:#597878;border:1px solid #B8CECB;padding:10px 17px}
+.join-menu summary:hover,.join-menu[open] summary{background:#C5D9D6;color:#597878}
+@media(max-width:720px){.join-menu summary{width:auto;border:1px solid #B8CECB;margin-top:8px}}
