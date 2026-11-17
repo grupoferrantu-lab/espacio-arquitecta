@@ -44,3 +44,10 @@ nav a[aria-current=page] { border-bottom-color: #69C2BD; }
 header .brand img{width:clamp(170px,19vw,235px);height:auto}
 footer .brand img{width:155px;height:auto}
 @media(max-width:720px){header .brand img{width:52px;height:52px;border-radius:50%}}
+
+/* Paleta solicitada: fondo, énfasis en negrita y encabezados. */
+:root{--paper:#A2DFDB;--bold-text:#26BEB7;--heading-text:#597878}
+body{background:var(--paper)}
+strong,b,.brand strong,.eyebrow,label,.error,.comment-author{color:var(--bold-text)}
+.check{color:var(--ink)}
+h1,h2,h3,h4,h5,h6,.hero h1 em{color:var(--heading-text)}
