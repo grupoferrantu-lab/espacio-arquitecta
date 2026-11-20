@@ -165,15 +165,26 @@ function initCollectionFilters(page) {
 function services() {
   const offerings = [
     ['Proyectos en conjunto', 'Convocatorias para formar equipos (concursos, licitaciones, proyectos complejos).'],
-    ['Mentorías y coaching', 'Un espacio para emparejar a quien empieza con quien ya tiene recorrido.'],
-    ['Encuentros', 'Charlas, talleres, clases, conversaciones abiertas como puerta de entrada.']
+    ['Mentorías y coaching', 'Un espacio para emparejar a quien empieza con quien ya tiene recorrido.', 'servicios/mentoria', 'Conoce Mentorías y coaching ↗'],
+    ['Encuentros', 'Charlas, talleres, clases, conversaciones abiertas como puerta de entrada.', 'servicios/encuentros', 'Ver artículos de encuentros']
   ];
   return shell(
     heading('Espacio ArquitectaLAB', 'Espacio ArquitectaLAB') +
-    '<div class="grid">' + offerings.map(([title, description], index) =>
-      `<article class="person"><h2>${title}</h2><p>${description}</p>${index === 1 ? link('servicios/mentoria', 'Conoce Mentorías y coaching ↗', 'button secondary') : ''}</article>`
+    '<div class="grid">' + offerings.map(([title, description, path, label]) =>
+      `<article class="person"><h2>${title}</h2><p>${description}</p>${path ? link(path, label, 'button secondary') : ''}</article>`
     ).join('') + '</div>'
   );
+}
+
+function encounters() {
+  return shell(crumb('servicios', 'Espacio ArquitectaLAB') +
+    heading('Espacio ArquitectaLAB', 'Encuentros',
+      'Artículos elaborados a partir de encuentros realizados por Espacio Arquitecta y sus colaboradores y colaboradoras.') + `
+    <div class="grid">
+      <article class="person">
+        <h2><a href="assets/encuentros/articulo_espacio_arquitecta.html">¿Dónde están las mujeres arquitectas?</a></h2>
+      </article>
+    </div>`);
 }
 
 function memberships() {
@@ -205,7 +216,10 @@ function render() {
   switch (page) {
     case 'inicio': html = home(); break;
     case 'comunidad': html = community(); break;
-    case 'servicios': html = id === 'mentoria' ? mentoring() : services(); break;
+    case 'servicios':
+      if (id === 'encuentros') html = encounters();
+      else html = id === 'mentoria' ? mentoring() : services();
+      break;
     case 'membresias': html = memberships(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
