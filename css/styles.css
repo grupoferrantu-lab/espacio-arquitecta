@@ -101,6 +101,14 @@ nav a[aria-current=page],
   color: var(--heading-text);
 }
 
+.community-prose {
+  max-width: none;
+}
+.community-prose p {
+  text-align: justify;
+  hyphens: auto;
+}
+
 .founders {
   margin-top: 55px;
   padding: clamp(24px, 5vw, 64px) clamp(14px, 4vw, 52px);
