@@ -182,7 +182,7 @@ function encounters() {
       'Artículos elaborados a partir de encuentros realizados por Espacio Arquitecta y sus colaboradores y colaboradoras.') + `
     <div class="grid">
       <article class="person">
-        <h2><a href="assets/encuentros/articulo_espacio_arquitecta.html">¿Dónde están las mujeres arquitectas?</a></h2>
+        <h2><a href="assets/encuentros/articulo_espacio_arquitecta.html" target="_blank" rel="noopener">¿Dónde están las mujeres arquitectas?</a></h2>
       </article>
     </div>`);
 }
