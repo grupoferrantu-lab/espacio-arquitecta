@@ -214,15 +214,27 @@ function encounterPublication(id) {
 }
 
 function memberships() {
-  return shell(heading('Espacio Arquitecta', 'Membresías', 'Distintas formas de crecer en comunidad y fortalecer tu trayectoria.') +
-    '<div class="grid">' +
-    '<article class="person"><h2>Membresía gratuita</h2><p>Perfil básico, acceso a la agenda y al podcast. Para crecer en comunidad.</p></article>' +
-    '<article class="person"><h2>Membresía de pago</h2><p>Perfil destacado con obras, acceso al LAB, descuentos en talleres y prioridad en convocatorias.</p></article>' +
-    '<article class="person"><h2>Mentoría y coaching</h2><p>Un servicio aparte dentro del LAB: sesiones individuales y programas grupales de pocas semanas, orientados a un resultado concreto.</p>' +
-    link('servicios/mentoria', 'Conoce Mentoría y coaching ↗', 'button secondary') + '</article>' +
-    '<article class="person"><h2>Publicidad y avisos</h2><p>Auspicios de empresas y colegios, y avisos de empleo o concursos.</p>' +
-    link('avisos', 'Ver avisos ↗', 'button secondary') + '</article></div>' +
-    '<p class="notice" style="margin-top:32px">Propuesta de membresías y servicios. Precios, fechas y condiciones por definir; todavía no hay contratación ni pagos habilitados.</p>');
+  return shell(heading('Espacio Arquitecta', 'Membresías',
+    'Elige cómo quieres ser parte. Todas las membresías sostienen una comunidad que busca que más arquitectas lideren.') + `
+    <div class="grid">
+      <article class="person">
+        <h2>Comunidad (gratuita)</h2>
+        <p>Acceso a la agenda y al podcast, perfil básico en el directorio y noticias de la comunidad.</p>
+      </article>
+      <article class="person">
+        <h2>Socia (de pago)</h2>
+        <p>Perfil destacado con obras, acceso al LAB, prioridad en convocatorias de proyectos y mentorías, y descuentos en talleres.</p>
+      </article>
+      <article class="person">
+        <h2>Mentoría con Ana María</h2>
+        <p>Acompañamiento individual y programas grupales de pocas semanas, con un resultado concreto: pasar de egresada a primer proyecto, o de profesional a liderazgo. Experiencia real y herramientas para llegar a tus metas.</p>
+      </article>
+      <article class="person">
+        <h2>Para organizaciones</h2>
+        <p>Auspicios, avisos y alianzas con empresas, colegios y universidades.</p>
+        <p>${link('agenda', 'Ver Agenda')} y ${link('contacto/publicidad', 'Publicidad')}</p>
+      </article>
+    </div>`);
 }
 function mentoring() {
   return shell(crumb('servicios', 'Espacio ArquitectaLAB') +

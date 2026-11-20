@@ -252,11 +252,15 @@ nav a[aria-current=page],
 .encounter-body img {
   display: block;
   width: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
-.encounter-body .people img { height: 300px; }
-.encounter-body .gallery img { height: 230px; }
+.encounter-body .people img {
+  height: clamp(140px, 38vw, 300px);
+  object-fit: contain;
+  object-position: left top;
+}
+
 .encounter-body figure { margin: 36px 0; }
 .encounter-body .stats { margin: 28px 0; }
 
@@ -311,7 +315,5 @@ nav a[aria-current=page],
 @media (max-width: 600px) {
   .encounter-hero { padding-bottom: 42px; }
   .encounter-body .stats { grid-template-columns: 1fr; }
-  .encounter-body .people img { height: 190px; }
-  .encounter-body .gallery img { height: 145px; }
   .encounter-body blockquote { padding-inline: 24px; }
 }
