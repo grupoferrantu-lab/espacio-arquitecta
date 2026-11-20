@@ -14,7 +14,15 @@ const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p>
 const shell=html=>`<section class="wrap">${html}</section>`;
 const crumb=(path,label)=>`<div class="breadcrumb">${link('inicio','Inicio')} / ${link(path,label)}</div>`;
 function home(){return `<section class="hero"><div class="hero-copy"><p class="eyebrow">Arquitectura · Comunidad · Conexiones</p><h1>Un espacio para<br><em>construir juntas.</em></h1><p class="lead">Conectamos miradas, compartimos experiencias y damos lugar a nuevas posibilidades en la arquitectura.</p><div class="actions">${link('voces','Sus Voces','button secondary')}${link('proyectos','Sus Obras','button secondary')}</div><p class="micro">Una comunidad por imaginar. Una maqueta para explorar.</p></div><div class="hero-art"><img src="assets/patio.svg" alt="Ilustración arquitectónica de un patio con arcos, vegetación y luz cálida" width="800" height="800"><video class="hero-video" src="assets/video_inicio.mp4" poster="assets/patio.svg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><div class="art-caption">${link('comunidad','DESCUBRE EL ESPACIO')}<span>Ilustración conceptual · Demo</span></div></div></section><div class="strip"><span>Miradas diversas</span><span>Conocimiento compartido</span><span>Conexiones que crecen</span></div>`;}
-function directory(){return shell(heading('Arquitectas y Obras','Conoce a nuestras arquitectas','Explora sus distintas miradas de la arquitectura. Busca por nombre, ciudad o especialidad')+`<form class="filters" id="filters" role="search"><label>Buscar arquitecta<input id="search" type="search" placeholder="Nombre, ciudad o especialidad" autocomplete="off"></label><label>Ciudad<select id="city"><option value="">Todas las ciudades</option>${[...new Set(D.people.map(p=>p.city))].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Especialidad<select id="field"><option value="">Todas las especialidades</option>${[...new Set(D.people.map(p=>p.field))].map(x=>`<option>${x}</option>`).join('')}</select></label><button type="reset" class="small">Limpiar</button></form><p id="count" class="count" role="status"></p><div class="grid" id="results"></div>`);}
+function directory(){return shell(heading('Arquitectas y Obras', 'Conoce a nuestras arquitectas') + `
+    <div class="prose directory-prose">
+      <p>Aquí están las arquitectas y lo que han construido. Un directorio para encontrarnos, reconocernos y recomendarnos, y para que las obras hablen tanto como las voces.</p>
+      <p><strong>Cómo explorar</strong> Busca por perfil o por obra, y filtra por región, especialidad, tipo de proyecto o etapa profesional.</p>
+      <p><strong>Qué muestra cada perfil</strong> Nombre y trayectoria · especialidad · región · obras destacadas con fotos y una breve descripción · enlaces a su sitio y redes · si está disponible para colaborar o mentorar.</p>
+      <p><strong>Qué muestra cada obra</strong> Nombre, ubicación y año · arquitecta o equipo · desafío que resolvió · qué la hace distinta.</p>
+      <p><strong>Convocatoria</strong> ¿Eres arquitecta y quieres aparecer? Hay un lugar para quien empieza, para quien consolida y para quien se está reinventando. ${link('participa', 'Formulario de postulación')}</p>
+    </div>
+    <form class="filters" id="filters" role="search"><label>Buscar arquitecta<input id="search" type="search" placeholder="Nombre, ciudad o especialidad" autocomplete="off"></label><label>Ciudad<select id="city"><option value="">Todas las ciudades</option>${[...new Set(D.people.map(p=>p.city))].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Especialidad<select id="field"><option value="">Todas las especialidades</option>${[...new Set(D.people.map(p=>p.field))].map(x=>`<option>${x}</option>`).join('')}</select></label><button type="reset" class="small">Limpiar</button></form><p id="count" class="count" role="status"></p><div class="grid" id="results"></div>`);}
 function profile(id) {
   const p = D.people.find(p => p.id === id);
   if (!p) return missing();
@@ -46,7 +54,7 @@ function profile(id) {
 function formPage(kind,id){let target=D.people.find(x=>x.id===id),event=D.events.find(x=>x.id===id);const membership=kind==='participa'&&id==='membresia',work=kind==='participa'&&id==='obra',publicity=kind==='contacto'&&id==='publicidad';const title=membership?'Acceder a Membresía':work?'Enviar obra':kind==='participa'?'Hay lugar para tu mirada.':kind==='inscripcion'?'Imaginemos el próximo encuentro.':'Conversemos.';return shell(crumb('comunidad','Comunidad')+heading('Formulario de demostración',title,'Prueba el recorrido con datos inventados. Esta maqueta no envía ni almacena información.')+`<p class="notice">${target?'Contacto de prueba con '+target.name+'. ':kind==='contacto'?'Contacto de prueba con Espacio Arquitecta. ':event?'Actividad ficticia: '+event.title+'. ':''}No se crea una cuenta, inscripción ni solicitud real. No introduzcas datos personales reales.</p><form id="demo-form" novalidate><div class="form-grid"><label>Nombre ficticio<input name="nombre" aria-label="Nombre ficticio" required minlength="2" maxlength="80" autocomplete="off" placeholder="Ej.: Andrea Demo" aria-describedby="err-nombre"><span class="error" id="err-nombre"></span></label><label>Correo ficticio<input name="correo" aria-label="Correo ficticio" type="email" required maxlength="150" autocomplete="off" placeholder="andrea@example.com" aria-describedby="err-correo"><span class="error" id="err-correo"></span></label></div><label>${membership?'Plan de membresía':work?'Tipo de obra':kind==='contacto'?'Tipo de contacto':'Interés'}<select name="interes" required aria-describedby="err-interes"><option value="">Selecciona una opción</option>${(membership?['Membresía gratuita','Membresía de pago']:work?['Obra construida','Proyecto','Concurso']:kind==='contacto'?['Consulta','Acceso a planes de publicidad']:['Conocer la comunidad','Explorar colaboración','Mentorías','Actividad demostrativa']).map(option=>`<option${publicity&&option==='Acceso a planes de publicidad'?' selected':''}>${option}</option>`).join('')}</select><span class="error" id="err-interes"></span></label>${work?'<label>Archivos de la obra<input type="file" name="archivos" multiple aria-describedby="file-help"></label><p class="micro" id="file-help">Puedes seleccionar varios archivos. En esta demostración permanecen en tu dispositivo: no se suben ni se envían.</p>':''}<label>Mensaje ficticio<textarea name="mensaje" aria-label="Mensaje ficticio" required minlength="10" maxlength="1000" placeholder="Escribe al menos 10 caracteres de prueba." aria-describedby="err-mensaje"></textarea><span class="error" id="err-mensaje"></span></label><label class="check"><input name="demo" aria-label="Entiendo que es una demostración y usaré datos inventados." type="checkbox" required aria-describedby="err-demo">Entiendo que es una demostración y usaré datos inventados.<span class="error" id="err-demo"></span></label><button type="submit">Probar validación ↗</button> <button type="reset">Limpiar</button><div id="form-status" role="status" tabindex="-1" hidden></div></form>`);}
 function community() {
   return shell(heading('ESPACIOaRQUITECTA', 'Quienes somos') + `
-    <div class="prose">
+    <div class="prose community-prose">
       <p>ESPACIOaRQUITECTA nació como un podcast para escuchar las voces de mujeres vinculadas a la arquitectura: arquitectas, abogadas, agrónomas, ingenieras, que desde distintas disciplinas apuestan por un futuro sostenible. En cada conversación apareció un hilo común, ese “algo más” que une a todas: una mirada sistémica, colaboración, sensibilidad social y urbana, e innovación.</p>
       <p>Hoy damos el siguiente paso. ESPACIOaRQUITECTA LAB es una plataforma digital de colaboración, aprendizaje y encuentro para visibilizar el trabajo y la creatividad de las arquitectas de América, y para conectarlas entre sí.</p>
       <h2>Nuestra mirada</h2>
@@ -55,7 +63,26 @@ function community() {
       <p>Una plataforma de colaboración, aprendizaje, encuentro y visibilización. La forma de la solución todavía está abierta, y la construimos con la comunidad.</p>
       <h2>Quién la impulsa</h2>
       <p>Ana María Torres, arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
-    </div>`);
+    </div>
+    <section class="founders" aria-labelledby="founders-title">
+      <h2 id="founders-title">Creadoras de Espacio Arquitecta</h2>
+      <div class="founders-grid">
+        <article>
+          <img src="assets/anita.jpeg" alt="Retrato de Ana María Torres" width="1235" height="1600" loading="lazy">
+          <h3>Ana María Torres</h3>
+          <p>Arquitecta Departamento de Aduanas<br>
+            Creadora de ESPACIOaRQUITECTA<br>
+            Co-fundadora de ESPACIOaRQUITECTALAB</p>
+        </article>
+        <article>
+          <img src="assets/paula.jpeg" alt="Retrato de Paula Cortés M." width="1122" height="1402" loading="lazy">
+          <h3>Paula Cortés M.</h3>
+          <p>Arquitecta Walmart Chile Inmobiliaria<br>
+            Co-animadora Mentomujeres el Podcast<br>
+            Co-fundadora de ESPACIOaRQUITECTALAB</p>
+        </article>
+      </div>
+    </section>`);
 }
 
 function editorial() {
@@ -138,15 +165,26 @@ function initCollectionFilters(page) {
 function services() {
   const offerings = [
     ['Proyectos en conjunto', 'Convocatorias para formar equipos (concursos, licitaciones, proyectos complejos).'],
-    ['Mentorías y coaching', 'Un espacio para emparejar a quien empieza con quien ya tiene recorrido.'],
-    ['Encuentros', 'Charlas, talleres, clases, conversaciones abiertas como puerta de entrada.']
+    ['Mentorías y coaching', 'Un espacio para emparejar a quien empieza con quien ya tiene recorrido.', 'servicios/mentoria', 'Conoce Mentorías y coaching ↗'],
+    ['Encuentros', 'Charlas, talleres, clases, conversaciones abiertas como puerta de entrada.', 'servicios/encuentros', 'Ver artículos de encuentros']
   ];
   return shell(
     heading('Espacio ArquitectaLAB', 'Espacio ArquitectaLAB') +
-    '<div class="grid">' + offerings.map(([title, description], index) =>
-      `<article class="person"><h2>${title}</h2><p>${description}</p>${index === 1 ? link('servicios/mentoria', 'Conoce Mentorías y coaching ↗', 'button secondary') : ''}</article>`
+    '<div class="grid">' + offerings.map(([title, description, path, label]) =>
+      `<article class="person"><h2>${title}</h2><p>${description}</p>${path ? link(path, label, 'button secondary') : ''}</article>`
     ).join('') + '</div>'
   );
+}
+
+function encounters() {
+  return shell(crumb('servicios', 'Espacio ArquitectaLAB') +
+    heading('Espacio ArquitectaLAB', 'Encuentros',
+      'Artículos elaborados a partir de encuentros realizados por Espacio Arquitecta y sus colaboradores y colaboradoras.') + `
+    <div class="grid">
+      <article class="person">
+        <h2><a href="assets/encuentros/articulo_espacio_arquitecta.html" target="_blank" rel="noopener">¿Dónde están las mujeres arquitectas?</a></h2>
+      </article>
+    </div>`);
 }
 
 function memberships() {
@@ -178,7 +216,10 @@ function render() {
   switch (page) {
     case 'inicio': html = home(); break;
     case 'comunidad': html = community(); break;
-    case 'servicios': html = id === 'mentoria' ? mentoring() : services(); break;
+    case 'servicios':
+      if (id === 'encuentros') html = encounters();
+      else html = id === 'mentoria' ? mentoring() : services();
+      break;
     case 'membresias': html = memberships(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
