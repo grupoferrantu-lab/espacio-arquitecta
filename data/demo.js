@@ -62,6 +62,7 @@ window.DEMO = {
   },
   formats: ["Podcast", "Video", "Entrevista", "Artículo escrito"],
   themes: ["Personas", "Proyectos", "Tendencias", "Innovación", "Sustentabilidad", "Comunidad"],
+  podcastTopics: ["Diseño sostenible", "Innovación tecnológica", "Inclusión", "Urbanismo", "Construcción"],
   publications: [
   {
     "id": "colaborar",
@@ -154,6 +155,7 @@ window.DEMO = {
     "id": "escuchar-territorio",
     "title": "Escuchar el territorio, compartir preguntas",
     "format": "Podcast",
+    "podcastTopics": ["Diseño sostenible", "Urbanismo"],
     "themes": [
       "Sustentabilidad",
       "Comunidad"
