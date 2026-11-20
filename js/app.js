@@ -1,7 +1,7 @@
 /* Navegación por hash compatible con file:// y alojamiento estático. Sin backend ni persistencia. */
 (() => {
 'use strict';
-const D=window.DEMO, participation=window.EditorialParticipation, main=document.querySelector('main'), nav=document.querySelector('nav'), menu=document.querySelector('.menu');
+const D=window.DEMO, encounterArticle=window.EncounterArticle, participation=window.EditorialParticipation, main=document.querySelector('main'), nav=document.querySelector('nav'), menu=document.querySelector('.menu');
 const link=(path,text,cls='')=>`<a class="${cls}" href="#/${path}">${text}</a>`;
 const notice='<p class="notice">Demostración: perfiles ilustrativos, publicaciones y actividades de demostración. No representan servicios ni convocatorias reales.</p>';
 const publicationCard = p => `<a class="card" href="#/publicacion/${p.id}">
@@ -190,9 +190,27 @@ function encounters() {
       'Artículos elaborados a partir de encuentros realizados por Espacio Arquitecta y sus colaboradores y colaboradoras.') + `
     <div class="grid">
       <article class="person">
-        <h2><a href="assets/encuentros/articulo_espacio_arquitecta.html" target="_blank" rel="noopener">¿Dónde están las mujeres arquitectas?</a></h2>
+        <h2>${link('encuentros/' + encounterArticle.id, encounterArticle.title)}</h2>
+        <p class="card-participation">${participation.summary(encounterArticle.id)}</p>
       </article>
     </div>`);
+}
+
+function encounterPublication(id) {
+  if (id !== encounterArticle.id) return missing();
+  return `
+    <div class="wrap encounter-navigation">${crumb('servicios/encuentros', 'Encuentros')}</div>
+    <article class="encounter-article">
+      <div class="encounter-hero">
+        <p class="encounter-brand">ESPACIOaRQUITECTA</p>
+        <p class="encounter-eyebrow">Conversación abierta · Arquitectura y liderazgo</p>
+        <h1>${encounterArticle.title}</h1>
+        <p class="encounter-description">${encounterArticle.description}</p>
+      </div>
+      <div class="encounter-body">${encounterArticle.body}</div>
+      <section class="encounter-closing">${encounterArticle.closing}</section>
+    </article>
+    ${shell(participation.render(id) + link('servicios/encuentros', 'Volver a Encuentros', 'button secondary'))}`;
 }
 
 function memberships() {
@@ -228,6 +246,7 @@ function render() {
       if (id === 'encuentros') html = encounters();
       else html = id === 'mentoria' ? mentoring() : services();
       break;
+    case 'encuentros': html = encounterPublication(id); break;
     case 'membresias': html = memberships(); break;
     case 'directorio': html = directory(); break;
     case 'perfil': html = profile(id); break;
@@ -259,7 +278,7 @@ function render() {
   nav.querySelector('.join-menu').open = false;
   nav.classList.remove('open');
   menu.setAttribute('aria-expanded', 'false');
-  const activePage = page === 'contacto' && !id ? 'comunidad' : {proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
+  const activePage = page === 'contacto' && !id ? 'comunidad' : {encuentros:'servicios', proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
   nav.querySelectorAll('a').forEach(a => {
     if (a.hash === '#/' + activePage) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');

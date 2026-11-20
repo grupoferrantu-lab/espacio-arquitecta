@@ -35,6 +35,7 @@ window.DEMO = {
     {id:'luisa-prado',name:'Luisa Prado',city:'Valparaíso',field:'Paisajismo',initials:'LP',color:'#A7E3DD',bio:'Propone espacios de encuentro y jardines que invitan al cuidado compartido de nuestro entorno.'}
   ],
   editorialParticipation: {
+    'mujeres-arquitectas': {reactions:0, comments:[]},
     'colaborar': {reactions:12, comments:[
       {name:'Antonia Demo', text:'Compartir las preguntas del proceso también puede abrir nuevas colaboraciones.'},
       {name:'Mar Demo', text:'Me interesa imaginar conversaciones entre distintas generaciones.'}
