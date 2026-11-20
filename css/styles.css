@@ -92,3 +92,46 @@ nav a,.join-menu summary{font-size:16px}
 .join-submenu a{font-size:16px}
 @media(max-width:1100px){nav a,.join-menu summary{font-size:16px}}
 @media(max-width:720px){nav a,.join-menu summary{font-size:17px}}
+
+nav a,
+nav a[aria-current=page],
+.join-menu summary,
+.join-menu summary:hover,
+.join-menu[open] summary {
+  color: var(--heading-text);
+}
+
+.founders {
+  margin-top: 55px;
+  padding: clamp(24px, 5vw, 64px) clamp(14px, 4vw, 52px);
+  background: var(--accent);
+  text-align: center;
+}
+.founders-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+}
+.founders img {
+  display: block;
+  width: min(100%, 280px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+.founders h3 {
+  margin-bottom: 8px;
+  color: #205654;
+  font: 700 1.25rem/1.3 Arial, sans-serif;
+  letter-spacing: normal;
+}
+.founders p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 720px) {
+  .founders-grid { grid-template-columns: 1fr; }
+}

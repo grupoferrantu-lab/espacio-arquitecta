@@ -55,7 +55,26 @@ function community() {
       <p>Una plataforma de colaboración, aprendizaje, encuentro y visibilización. La forma de la solución todavía está abierta, y la construimos con la comunidad.</p>
       <h2>Quién la impulsa</h2>
       <p>Ana María Torres, arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
-    </div>`);
+    </div>
+    <section class="founders" aria-labelledby="founders-title">
+      <h2 id="founders-title">Creadoras de Espacio Arquitecta</h2>
+      <div class="founders-grid">
+        <article>
+          <img src="assets/anita.jpeg" alt="Retrato de Ana María Torres" width="1235" height="1600" loading="lazy">
+          <h3>Ana María Torres</h3>
+          <p>Arquitecta Departamento de Aduanas<br>
+            Creadora de ESPACIOaRQUITECTA<br>
+            Co-fundadora de ESPACIOaRQUITECTALAB</p>
+        </article>
+        <article>
+          <img src="assets/paula.jpeg" alt="Retrato de Paula Cortés M." width="1122" height="1402" loading="lazy">
+          <h3>Paula Cortés M.</h3>
+          <p>Arquitecta Walmart Chile Inmobiliaria<br>
+            Co-animadora Mentomujeres el Podcast<br>
+            Co-fundadora de ESPACIOaRQUITECTALAB</p>
+        </article>
+      </div>
+    </section>`);
 }
 
 function editorial() {
