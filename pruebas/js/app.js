@@ -133,26 +133,34 @@ function collectionItems(page) {
   return D.publications.filter(p => page === 'voces' ? p.format === 'Podcast' : p.themes.includes('Proyectos'));
 }
 function collectionPage(page) {
-  const title = page === 'voces' ? 'Sus Voces' : 'Sus Proyectos';
-  const description = page === 'voces' ? 'Todos los podcasts de la comunidad. Explora por arquitecta y tema.' : 'Publicaciones sobre proyectos. Explora por arquitecta y tema.';
-  const podcastLink = page === 'voces'
-    ? '<p><a class="button" href="https://open.spotify.com/show/2gKyb8o620HxBYZ4spyAE0">Escuchar Espacio Arquitecta en Spotify ↗</a></p>'
+  const isPodcast = page === 'voces';
+  const title = isPodcast ? 'Sus Voces' : 'Sus Proyectos';
+  const description = isPodcast
+    ? 'ESPACIOaRQUITECTA: diseñando y creando con la voz de mujeres en la arquitectura'
+    : 'Publicaciones sobre proyectos. Explora por arquitecta y tema.';
+  const topics = isPodcast ? D.podcastTopics : D.themes;
+  const podcastDetails = isPodcast
+    ? `<p class="prose">Conversaciones inspiradoras con arquitectas, abogadas, agrónomas e ingenieras que están dando forma al entorno que habitamos. Desde espacios públicos accesibles hasta espacios seguros, del buen construir y otras complejidades del campo, escuchamos cómo se lidera, se crea y se colabora desde una mirada femenina.</p>
+      <p><a class="button" href="https://open.spotify.com/show/2gKyb8o620HxBYZ4spyAE0">Escuchar Espacio Arquitecta en Spotify ↗</a></p>
+      <p>25 episodios · 25 voces en la temporada 1</p>
+      ${link('contacto', '¿Quieres contar tu historia?', 'button secondary')}`
     : '';
-  return shell(crumb('inicio', 'Inicio') + heading('Contenidos de demostración', title, description) + podcastLink +
+  return shell(crumb('inicio', 'Inicio') + heading(isPodcast ? 'Podcast' : 'Contenidos de demostración', title, description) + podcastDetails +
     `<form class="filters editorial-filters" id="collection-filters" aria-label="Filtros de ${title}">
       <label>Arquitecta<select id="architect"><option value="">Todas las arquitectas</option>
         ${D.people.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
         <option value="unassigned">Sin arquitecta asignada</option></select></label>
       <label>Tema<select id="topic"><option value="">Todos los temas</option>
-        ${D.themes.map(t => `<option>${t}</option>`).join('')}</select></label>
+        ${topics.map(t => `<option>${t}</option>`).join('')}</select></label>
       <button type="reset" class="small">Limpiar filtros</button>
     </form><p id="collection-count" class="count" role="status"></p><div class="grid" id="collection-results"></div>`);
 }
 function initCollectionFilters(page) {
   const items = collectionItems(page), form = document.querySelector('#collection-filters');
+  const topicField = page === 'voces' ? 'podcastTopics' : 'themes';
   function update() {
     const architect = form.querySelector('#architect').value, topic = form.querySelector('#topic').value;
-    const found = items.filter(p => (!architect || (architect === 'unassigned' ? !p.architectIds?.length : p.architectIds?.includes(architect))) && (!topic || p.themes.includes(topic)));
+    const found = items.filter(p => (!architect || (architect === 'unassigned' ? !p.architectIds?.length : p.architectIds?.includes(architect))) && (!topic || p[topicField]?.includes(topic)));
     document.querySelector('#collection-count').textContent = `${found.length} de ${items.length} ${page === 'voces' ? 'podcasts' : 'publicaciones sobre proyectos'}`;
     document.querySelector('#collection-results').innerHTML = found.length ? found.map(p => `<article>${publicationCard(p)}<p class="micro">${(p.architectIds || []).map(id => D.people.find(person => person.id === id)?.name).filter(Boolean).join(', ') || 'Sin arquitecta asignada'}</p></article>`).join('') :
       '<div class="empty"><h2>No encontramos contenidos.</h2><p>Prueba otra arquitecta o tema, o limpia los filtros.</p></div>';
