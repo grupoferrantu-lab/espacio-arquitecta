@@ -1,4 +1,4 @@
-# Espacio Arquitecta · Maqueta navegable
+# ESPACIOaRQUITECTA · Maqueta navegable
 
 ## Abrir y compartir
 1. Descomprime el ZIP completo en una carpeta.
