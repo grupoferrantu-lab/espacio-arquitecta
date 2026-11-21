@@ -1,4 +1,4 @@
-# Mapa de navegación · Espacio Arquitecta
+# Mapa de navegación · ESPACIOaRQUITECTA
 
 La siguiente estructura corresponde a la maqueta simplificada. El menú principal tiene exactamente seis opciones. Las flechas muestran accesos a contenido; se omiten los enlaces de retorno y el menú compartido en cada pantalla para facilitar la lectura.
 

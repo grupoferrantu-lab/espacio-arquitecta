@@ -1,12 +1,12 @@
-/* Artículo de la conversación abierta de Espacio Arquitecta. */
+/* Artículo de la conversación abierta de ESPACIOaRQUITECTA. */
 window.EncounterArticle = {
   id: 'mujeres-arquitectas',
   title: '¿Dónde están las mujeres arquitectas?',
   description: 'Del talento al liderazgo: una conversación sobre las oportunidades, las barreras y los espacios que aún necesitamos construir.',
   body: `
     <p class="encounter-intro">Muchas mujeres llegan a la arquitectura. Muchas menos alcanzan posiciones desde las que pueden dirigir proyectos, tomar decisiones y recibir reconocimiento. ¿Qué sucede entre el inicio de la trayectoria profesional y los espacios de liderazgo?</p>
-    <p>Esta pregunta dio origen a la conversación abierta impulsada por Espacio Arquitecta, presentada por Ana María Torres y Paula Cortés. Más que ofrecer respuestas definitivas, la propuesta invita a mirar las brechas, compartir experiencias y pensar colectivamente cómo transformarlas.</p>
-    <div class="people"><img loading="lazy" src="assets/encuentros/arquitectas-1.jpeg" alt="Retrato incluido en la presentación de Espacio Arquitecta"><img loading="lazy" src="assets/encuentros/arquitectas-2.png" alt="Retrato incluido en la presentación de Espacio Arquitecta"></div>
+    <p>Esta pregunta dio origen a la conversación abierta impulsada por ESPACIOaRQUITECTA, presentada por Ana María Torres y Paula Cortés. Más que ofrecer respuestas definitivas, la propuesta invita a mirar las brechas, compartir experiencias y pensar colectivamente cómo transformarlas.</p>
+    <div class="people"><img loading="lazy" src="assets/encuentros/arquitectas-1.jpeg" alt="Retrato incluido en la presentación de ESPACIOaRQUITECTA"><img loading="lazy" src="assets/encuentros/arquitectas-2.png" alt="Retrato incluido en la presentación de ESPACIOaRQUITECTA"></div>
     <h2>El desafío no termina al egresar</h2>
     <p>La presencia de mujeres en la formación arquitectónica es significativa. La presentación sitúa su participación en torno al 45–50 % en distintos contextos internacionales, pero advierte que esa presencia no se traduce automáticamente en representación equivalente en el ejercicio profesional, la dirección o el reconocimiento.</p>
     <p>Por eso, la pregunta no es únicamente cuántas mujeres entran a estudiar arquitectura. También es cuántas encuentran oportunidades de crecimiento, cuántas lideran equipos, cuántas participan en las decisiones y cuántas pueden desarrollar una trayectoria visible y valorada.</p>
@@ -26,14 +26,14 @@ window.EncounterArticle = {
     <p>La conversación propone observar cuatro momentos en los que las oportunidades pueden volverse desiguales: la <strong>inserción</strong> en el mundo laboral, la <strong>representación</strong> en posiciones de responsabilidad, la <strong>visibilidad</strong> del aporte profesional y el <strong>salario</strong> como expresión del valor asignado al trabajo.</p>
     <p>Entre las posibles causas que plantea la presentación están los estereotipos y desigualdades culturales, la falta de oportunidades de mentoría y la escasa información sobre las distintas rutas de desarrollo profesional. Son hipótesis para explorar, no respuestas cerradas: comprender qué ocurre exige escuchar a quienes viven estas experiencias.</p>
     <h2>De la conversación a la construcción colectiva</h2>
-    <p>Espacio Arquitecta propone pasar del diagnóstico a la acción. Su propósito es impulsar una plataforma de <strong>colaboración, aprendizaje, encuentro y visibilización</strong>, donde las experiencias y conexiones puedan abrir nuevas posibilidades para otras mujeres.</p>
+    <p>ESPACIOaRQUITECTA propone pasar del diagnóstico a la acción. Su propósito es impulsar una plataforma de <strong>colaboración, aprendizaje, encuentro y visibilización</strong>, donde las experiencias y conexiones puedan abrir nuevas posibilidades para otras mujeres.</p>
     <p>La iniciativa invita a compartir conocimientos, crear redes y atreverse a ocupar nuevos espacios. No busca definir una única forma de éxito profesional, sino ampliar las opciones para que cada arquitecta pueda construir su propio camino.</p>
     <blockquote>“No queremos solo medir la brecha. Queremos decidir qué hacemos con ella.”</blockquote>
     <h2>La conversación continúa</h2>
     <p>¿Qué necesitas para participar, crecer y liderar en arquitectura? ¿Qué barreras has encontrado y qué oportunidades te gustaría que existieran? Escuchar esas respuestas es parte esencial del camino.</p>
     <p>Porque transformar la profesión no es solo reconocer lo que falta: también es conectar experiencias, compartir oportunidades y construir, juntas, los espacios que queremos habitar.</p>
     <p class="pill">Compartir · Conectar · Atreverse</p>
-    <p class="source">Artículo editorial elaborado a partir de la presentación «¿Dónde están las mujeres arquitectas? — Conversación abierta», de Espacio Arquitecta. Las imágenes proceden de la presentación proporcionada; revisar los derechos de publicación de fotografías y materiales de terceros antes de subirlas al sitio.</p>
+    <p class="source">Artículo editorial elaborado a partir de la presentación «¿Dónde están las mujeres arquitectas? — Conversación abierta», de ESPACIOaRQUITECTA. Las imágenes proceden de la presentación proporcionada; revisar los derechos de publicación de fotografías y materiales de terceros antes de subirlas al sitio.</p>
   `,
   closing: `<h2>Que las arquitectas no solo egresen, sino que lideren, creen y dejen huella.</h2><p>ESPACIOaRQUITECTA · Dando forma al futuro</p>`
 };
