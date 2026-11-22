@@ -7,7 +7,7 @@ const notice='<p class="notice">Demostración: perfiles ilustrativos, publicacio
 const publicationCard = p => `<a class="card" href="#/publicacion/${p.id}">
   <img src="${p.image}" alt="${p.alt}" loading="lazy" width="600" height="450">
   <p class="meta">${p.format} · ${p.themes.join(' / ')}</p>
-  <h3>${p.title}</h3><p>${p.text}</p><span class="card-participation">${participation.summary(p.id)}</span><span class="arrow">Ver publicación ↗</span></a>`;
+  <h3>${p.title}</h3><p>${p.text}</p>${p.source === "sheets" ? `<p class="meta">${[p.city,p.year,p.category].filter(Boolean).join(" · ")}</p>` : `<span class="card-participation">${participation.summary(p.id)}</span>`}<span class="arrow">${p.source === "sheets" ? "Ver obra" : "Ver publicación"} ↗</span></a>`;
 const personCard=p=>`<a class="card person" href="#/perfil/${p.id}">${p.photo ? `<img class="person-photo" src="${p.photo}" alt="" width="1125" height="1079" loading="lazy">` : `<div class="avatar" style="background:${p.color}" aria-hidden="true">${p.initials}</div>`}<span class="tag">${p.field}</span><h3>${p.name}</h3><p>${p.city}${p.career ? "" : " · Perfil ficticio"}</p><span class="arrow">Conocer su mirada ↗</span></a>`;
 const eventRow=e=>`<article class="event"><div class="date"><strong>${e.day}</strong>${e.month}</div><div><h3>${link('actividad/'+e.id,e.title)}</h3><p>${e.type} · Actividad ficticia</p></div>${link('actividad/'+e.id,'Ver actividad ↗','button secondary small')}</article>`;
 const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p><h1>${title}</h1>${desc?`<p class="lead">${desc}</p>`:''}</div>`;
