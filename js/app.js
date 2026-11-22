@@ -380,7 +380,7 @@ async function loadSheetArchitects() {
     const rows = await response.json();
     if (!Array.isArray(rows)) throw new Error('Formato inesperado');
     const safe = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    const publicUrl = value => { try { const url = new URL(value); if (url.protocol !== 'https:') return ''; const match = url.hostname === 'drive.google.com' && url.pathname.match(/^\/file\/d\/([\w-]+)/); return safe(match ? 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=w1000' : url.href); } catch { return ''; } };
+    const publicUrl = value => { try { const url = new URL(value); if (url.protocol !== 'https:') return ''; const match = url.hostname === 'drive.google.com' && url.pathname.match(/^\/file\/d\/([\w-]+)/); const driveId = url.hostname === 'drive.google.com' ? (match?.[1] || url.searchParams.get('id')) : null; return safe(driveId && /^[\w-]+$/.test(driveId) ? 'https://drive.google.com/thumbnail?id=' + driveId + '&sz=w1000' : url.href); } catch { return ''; } };
     const ids = new Set(D.people.map(p => p.id));
     for (const row of rows) {
       if (!row || typeof row.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(row.id) || ids.has(row.id) || typeof row.name !== 'string' || !row.name.trim()) continue;
