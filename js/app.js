@@ -368,5 +368,29 @@ document.addEventListener('click', e => { const dropdown=nav.querySelector('.joi
 nav.addEventListener('click', e => {
   if (e.target.closest('a')) { nav.querySelector('.join-menu').open = false; nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }
 });
-menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});nav.addEventListener('keydown',e=>{if(e.key==='Escape'){const dropdown=nav.querySelector('.join-menu');if(dropdown.open){dropdown.open=false;dropdown.querySelector('summary').focus();return;}nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus();}});window.addEventListener('hashchange',render);render();
+menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});nav.addEventListener('keydown',e=>{if(e.key==='Escape'){const dropdown=nav.querySelector('.join-menu');if(dropdown.open){dropdown.open=false;dropdown.querySelector('summary').focus();return;}nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus();}});
+/* POC: perfiles publicados en Google Sheets. Conserva los datos demo. */
+async function loadSheetArchitects() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbw7sUy_4oc40s5NzPli_f2dyfIX9G8wkIs-j4iFYUew0mcaOeGu7YIOyOn6OF3d2CGM4A/exec', {signal: controller.signal, cache: 'no-store', credentials: 'omit'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const rows = await response.json();
+    if (!Array.isArray(rows)) throw new Error('Formato inesperado');
+    const safe = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const ids = new Set(D.people.map(p => p.id));
+    for (const row of rows) {
+      if (!row || typeof row.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(row.id) || ids.has(row.id) || typeof row.name !== 'string' || !row.name.trim()) continue;
+      D.people.push({id: row.id, name: safe(row.name), city: safe(row.city), field: safe(row.field), bio: safe(row.bio), initials: safe(row.name.trim().split(/\s+/).slice(0,2).map(n => n[0]).join('').toUpperCase()), color: '#A7E3DD', photo: '', source: 'sheets'});
+      ids.add(row.id);
+    }
+    if (/^#\/(directorio|perfil|proyectos|contacto)(\/|$)/.test(location.hash)) render();
+  } catch (error) {
+    console.warn('POC Google Sheets: no se pudieron cargar los perfiles.', error);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+window.addEventListener('hashchange',render);render();loadSheetArchitects();
 })();
