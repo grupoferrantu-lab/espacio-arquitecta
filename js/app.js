@@ -2,12 +2,14 @@
 (() => {
 'use strict';
 const D=window.DEMO, encounterArticle=window.EncounterArticle, participation=window.EditorialParticipation, main=document.querySelector('main'), nav=document.querySelector('nav'), menu=document.querySelector('.menu');
+D.people = [];
+let architectLoadState = 'loading';
 const link=(path,text,cls='')=>`<a class="${cls}" href="#/${path}">${text}</a>`;
 const notice='<p class="notice">Demostración: perfiles ilustrativos, publicaciones y actividades de demostración. No representan servicios ni convocatorias reales.</p>';
 const publicationCard = p => `<a class="card" href="#/publicacion/${p.id}">
-  <img src="${p.image}" alt="${p.alt}" loading="lazy" width="600" height="450">
+  ${p.image ? `<img src="${p.image}" alt="${p.alt}" loading="lazy" width="600" height="450">` : ""}
   <p class="meta">${p.format} · ${p.themes.join(' / ')}</p>
-  <h3>${p.title}</h3><p>${p.text}</p><span class="card-participation">${participation.summary(p.id)}</span><span class="arrow">Ver publicación ↗</span></a>`;
+  <h3>${p.title}</h3><p>${p.text}</p>${p.source === "sheets" ? `<p class="meta">${[p.city,p.year,p.category].filter(Boolean).join(" · ")}</p>` : `<span class="card-participation">${participation.summary(p.id)}</span>`}<span class="arrow">${p.source === "sheets" ? "Ver obra" : "Ver publicación"} ↗</span></a>`;
 const personCard=p=>`<a class="card person" href="#/perfil/${p.id}">${p.photo ? `<img class="person-photo" src="${p.photo}" alt="" width="1125" height="1079" loading="lazy">` : `<div class="avatar" style="background:${p.color}" aria-hidden="true">${p.initials}</div>`}<span class="tag">${p.field}</span><h3>${p.name}</h3><p>${p.city}${p.career ? "" : " · Perfil ficticio"}</p><span class="arrow">Conocer su mirada ↗</span></a>`;
 const eventRow=e=>`<article class="event"><div class="date"><strong>${e.day}</strong>${e.month}</div><div><h3>${link('actividad/'+e.id,e.title)}</h3><p>${e.type} · Actividad ficticia</p></div>${link('actividad/'+e.id,'Ver actividad ↗','button secondary small')}</article>`;
 const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p><h1>${title}</h1>${desc?`<p class="lead">${desc}</p>`:''}</div>`;
@@ -38,7 +40,7 @@ function profile(id) {
           <span class="tag">${p.field} · ${p.city}</span>
           <div class="actions">${link('contacto/' + p.id, 'Formulario de contacto ↗', 'button')}${worksLink}</div>
         </div>
-        <img class="profile-photo" src="${p.photo}" alt="Retrato de ${p.name}" width="1125" height="1079">
+        ${p.photo ? `<img class="profile-photo" src="${p.photo}" alt="Retrato de ${p.name}" width="1125" height="1079" referrerpolicy="no-referrer">` : `<div class="profile-visual"><div class="avatar" style="background:${p.color}">${p.initials}</div></div>`}
       </div>
       <div class="prose">${p.career.map(([title, items]) => `
         <section>
@@ -105,6 +107,7 @@ function editorial() {
 function publication(id) {
   const p = D.publications.find(p => p.id === id);
   if (!p) return missing();
+  if (p.source === "sheets") return shell(crumb("proyectos","Obras") + heading("Obra",p.title,p.text) + `<p class="meta">${[p.city,p.year,p.category].filter(Boolean).join(" · ")}</p>${p.image ? `<img class="wide-image" src="${p.image}" alt="${p.alt}">` : ""}<p>${p.architectIds.map(id => D.people.find(a => a.id === id)).filter(Boolean).map(a => link("perfil/"+a.id,a.name)).join(" · ")}</p>`);
   const media = p.video ? `<video id="publication-video" controls playsinline preload="none"
     poster="${p.image}" aria-label="${p.title}"></video>
     <p id="video-help" class="micro">Animación conceptual local, sin audio. No es material institucional.</p>` :
@@ -169,7 +172,7 @@ function collectionPage(page, person) {
       <p>25 episodios · 25 voces en la temporada 1</p>
       ${link('contacto', '¿Quieres contar tu historia?', 'button secondary')}`
     : '';
-  return shell((person ? crumb('perfil/' + person.id, person.name) : crumb('inicio', 'Inicio')) + (isPodcast ? podcastDetails : heading('Contenidos de demostración', title, description)) +
+  return shell((person ? crumb('perfil/' + person.id, person.name) : crumb('inicio', 'Inicio')) + (isPodcast ? podcastDetails : heading(person ? 'Arquitectas y Obras' : 'Contenidos de demostración', title, description)) +
     `<form class="filters editorial-filters" id="collection-filters" aria-label="Filtros de ${title}">
       ${person ? '' : `<label>Arquitecta<select id="architect"><option value="">Todas las arquitectas</option>
         ${D.people.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
@@ -345,7 +348,7 @@ function render() {
   if (document.querySelector('#editorial-participation')) participation.mount(id);
 }
 function normalize(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
-function initFilters(){const f=document.querySelector('#filters');function update(){const q=normalize(f.querySelector('#search').value.trim()),city=f.querySelector('#city').value,field=f.querySelector('#field').value;const found=D.people.filter(p=>(!city||p.city===city)&&(!field||p.field===field)&&normalize(p.name+' '+p.city+' '+p.field).includes(q));document.querySelector('#count').textContent=`${found.length} de ${D.people.length} perfiles`;document.querySelector('#results').innerHTML=found.length?found.map(personCard).join(''):'<div class="empty"><h2>No encontramos coincidencias.</h2><p>Prueba otra búsqueda o limpia los filtros.</p></div>';}
+function initFilters(){const f=document.querySelector('#filters');function update(){const q=normalize(f.querySelector('#search').value.trim()),city=f.querySelector('#city').value,field=f.querySelector('#field').value;const found=D.people.filter(p=>(!city||p.city===city)&&(!field||p.field===field)&&normalize(p.name+' '+p.city+' '+p.field).includes(q));document.querySelector('#count').textContent=`${found.length} de ${D.people.length} perfiles`;document.querySelector('#results').innerHTML=architectLoadState === 'loading' ? '<p role="status">Cargando arquitectas…</p>' : architectLoadState === 'error' ? '<p role="alert">No fue posible cargar el directorio. Recarga la página para volver a intentar.</p>' : found.length?found.map(personCard).join(''):'<div class="empty"><h2>No encontramos coincidencias.</h2><p>Prueba otra búsqueda o limpia los filtros.</p></div>';}
 f.addEventListener('input',update);f.addEventListener('change',update);f.addEventListener('submit',e=>e.preventDefault());f.addEventListener('reset',()=>setTimeout(update,0));update();}
 function initForm(){const form=document.querySelector('#demo-form'),status=document.querySelector('#form-status');function clear(){status.hidden=true;form.querySelectorAll('.error').forEach(x=>x.textContent='');form.querySelectorAll('[aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));}form.addEventListener('reset',clear);form.addEventListener('submit',e=>{e.preventDefault();clear();let first;for(const name of ['nombre','correo','interes','mensaje','demo']){const field=form.elements[name];let msg='';if(name==='demo'&&!field.checked)msg='Confirma que comprendes el carácter demostrativo.';else if(name!=='demo'&&!field.value.trim())msg='Completa este campo con datos ficticios.';else if(name==='nombre'&&field.value.trim().length<2)msg='Escribe al menos 2 caracteres.';else if(name==='correo'&&field.validity.typeMismatch)msg='Usa un formato como nombre@example.com.';else if(name==='mensaje'&&field.value.trim().length<10)msg='Escribe al menos 10 caracteres.';if(msg){document.querySelector('#err-'+name).textContent=msg;field.setAttribute('aria-invalid','true');first??=field;}}if(first){first.focus();return;}form.reset();status.className='form-status';status.hidden=false;status.textContent='Prueba completada: los campos cumplen la validación básica. No se envió ni registró información. La organización no ha recibido ninguna solicitud.';status.focus();});}
 function initHeroVideo() {
@@ -368,5 +371,45 @@ document.addEventListener('click', e => { const dropdown=nav.querySelector('.joi
 nav.addEventListener('click', e => {
   if (e.target.closest('a')) { nav.querySelector('.join-menu').open = false; nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }
 });
-menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});nav.addEventListener('keydown',e=>{if(e.key==='Escape'){const dropdown=nav.querySelector('.join-menu');if(dropdown.open){dropdown.open=false;dropdown.querySelector('summary').focus();return;}nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus();}});window.addEventListener('hashchange',render);render();
+menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});nav.addEventListener('keydown',e=>{if(e.key==='Escape'){const dropdown=nav.querySelector('.join-menu');if(dropdown.open){dropdown.open=false;dropdown.querySelector('summary').focus();return;}nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus();}});
+/* POC: perfiles publicados en Google Sheets. Conserva los datos demo. */
+async function loadSheetArchitects() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbw7sUy_4oc40s5NzPli_f2dyfIX9G8wkIs-j4iFYUew0mcaOeGu7YIOyOn6OF3d2CGM4A/exec', {signal: controller.signal, cache: 'no-store', credentials: 'omit'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const rows = await response.json();
+    if (!Array.isArray(rows)) throw new Error('Formato inesperado');
+    const safe = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const publicUrl = value => { try { const url = new URL(value); if (url.protocol !== 'https:') return ''; const match = url.hostname === 'drive.google.com' && url.pathname.match(/^\/file\/d\/([\w-]+)/); const driveId = url.hostname === 'drive.google.com' ? (match?.[1] || url.searchParams.get('id')) : null; return safe(driveId && /^[\w-]+$/.test(driveId) ? 'https://drive.google.com/thumbnail?id=' + driveId + '&sz=w1000' : url.href); } catch { return ''; } };
+    const ids = new Set(D.people.map(p => p.id));
+    for (const row of rows) {
+      if (!row || typeof row.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(row.id) || ids.has(row.id) || typeof row.name !== 'string' || !row.name.trim()) continue;
+      const career = Array.isArray(row.career) ? row.career.filter(x => Array.isArray(x) && Array.isArray(x[1])).map(([title, items]) => [safe(title), items.map(safe)]) : [];
+      const p = {id: row.id, name: safe(row.name), city: safe(row.city), field: safe(row.field), bio: safe(row.bio), initials: safe(row.name.trim().split(/\s+/).slice(0,2).map(n => n[0]).join('').toUpperCase()), color: '#A7E3DD', photo: publicUrl(row.photo), source: 'sheets', career};
+      D.people.push(p);
+      for (const w of Array.isArray(row.works) ? row.works : []) {
+        if (!w || typeof w.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(w.id) || !w.title) continue;
+        const id = 'sheet-work-' + w.id;
+        let work = D.publications.find(x => x.id === id);
+        if (!work) {
+          work = {id, source:'sheets', title:safe(w.title), format:'Artículo escrito', themes:['Proyectos'], image:publicUrl(w.photo), alt:safe(w.title), text:safe(w.description), body:[safe(w.description)], city:safe(w.city), year:safe(w.year), category:safe(w.category), architectIds:[]};
+          D.publications.push(work);
+        }
+        if (!work.architectIds.includes(p.id)) work.architectIds.push(p.id);
+      }
+      ids.add(row.id);
+    }
+    architectLoadState = 'ready';
+    if (/^#\/(directorio|perfil|proyectos|contacto|publicacion|editorial|voces)(\/|$)/.test(location.hash)) render();
+  } catch (error) {
+    architectLoadState = 'error';
+    console.warn('POC Google Sheets: no se pudieron cargar los perfiles.', error);
+    if (/^#\/?(directorio|perfil|proyectos|contacto)(\/|$)/.test(location.hash)) render();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+window.addEventListener('hashchange',render);render();loadSheetArchitects();
 })();
