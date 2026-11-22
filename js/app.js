@@ -38,7 +38,7 @@ function profile(id) {
           <span class="tag">${p.field} · ${p.city}</span>
           <div class="actions">${link('contacto/' + p.id, 'Formulario de contacto ↗', 'button')}${worksLink}</div>
         </div>
-        <img class="profile-photo" src="${p.photo}" alt="Retrato de ${p.name}" width="1125" height="1079">
+        ${p.photo ? `<img class="profile-photo" src="${p.photo}" alt="Retrato de ${p.name}" width="1125" height="1079" referrerpolicy="no-referrer">` : `<div class="profile-visual"><div class="avatar" style="background:${p.color}">${p.initials}</div></div>`}
       </div>
       <div class="prose">${p.career.map(([title, items]) => `
         <section>
@@ -105,6 +105,7 @@ function editorial() {
 function publication(id) {
   const p = D.publications.find(p => p.id === id);
   if (!p) return missing();
+  if (p.source === "sheets") return shell(crumb("proyectos","Obras") + heading("Obra de prueba",p.title,p.text) + `<p class="meta">${[p.city,p.year,p.category].filter(Boolean).join(" · ")}</p><img class="wide-image" src="${p.image}" alt="${p.alt}"><p>${p.architectIds.map(id => D.people.find(a => a.id === id)).filter(Boolean).map(a => link("perfil/"+a.id,a.name)).join(" · ")}</p>`);
   const media = p.video ? `<video id="publication-video" controls playsinline preload="none"
     poster="${p.image}" aria-label="${p.title}"></video>
     <p id="video-help" class="micro">Animación conceptual local, sin audio. No es material institucional.</p>` :
@@ -379,13 +380,26 @@ async function loadSheetArchitects() {
     const rows = await response.json();
     if (!Array.isArray(rows)) throw new Error('Formato inesperado');
     const safe = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const publicUrl = value => { try { const url = new URL(value); if (url.protocol !== 'https:') return ''; const match = url.hostname === 'drive.google.com' && url.pathname.match(/^\/file\/d\/([\w-]+)/); return safe(match ? 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=w1000' : url.href); } catch { return ''; } };
     const ids = new Set(D.people.map(p => p.id));
     for (const row of rows) {
       if (!row || typeof row.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(row.id) || ids.has(row.id) || typeof row.name !== 'string' || !row.name.trim()) continue;
-      D.people.push({id: row.id, name: safe(row.name), city: safe(row.city), field: safe(row.field), bio: safe(row.bio), initials: safe(row.name.trim().split(/\s+/).slice(0,2).map(n => n[0]).join('').toUpperCase()), color: '#A7E3DD', photo: '', source: 'sheets'});
+      const career = Array.isArray(row.career) ? row.career.filter(x => Array.isArray(x) && Array.isArray(x[1])).map(([title, items]) => [safe(title), items.map(safe)]) : [];
+      const p = {id: row.id, name: safe(row.name), city: safe(row.city), field: safe(row.field), bio: safe(row.bio), initials: safe(row.name.trim().split(/\s+/).slice(0,2).map(n => n[0]).join('').toUpperCase()), color: '#A7E3DD', photo: publicUrl(row.photo), source: 'sheets', career};
+      D.people.push(p);
+      for (const w of Array.isArray(row.works) ? row.works : []) {
+        if (!w || typeof w.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(w.id) || !w.title) continue;
+        const id = 'sheet-work-' + w.id;
+        let work = D.publications.find(x => x.id === id);
+        if (!work) {
+          work = {id, source:'sheets', title:safe(w.title), format:'Artículo escrito', themes:['Proyectos'], image:publicUrl(w.photo) || 'assets/patio.svg', alt:safe(w.title), text:safe(w.description), body:[safe(w.description)], city:safe(w.city), year:safe(w.year), category:safe(w.category), architectIds:[]};
+          D.publications.push(work);
+        }
+        if (!work.architectIds.includes(p.id)) work.architectIds.push(p.id);
+      }
       ids.add(row.id);
     }
-    if (/^#\/(directorio|perfil|proyectos|contacto)(\/|$)/.test(location.hash)) render();
+    if (/^#\/(directorio|perfil|proyectos|contacto|publicacion|editorial)(\/|$)/.test(location.hash)) render();
   } catch (error) {
     console.warn('POC Google Sheets: no se pudieron cargar los perfiles.', error);
   } finally {
