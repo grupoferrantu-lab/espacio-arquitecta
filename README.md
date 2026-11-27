@@ -3,7 +3,7 @@
 ## Abrir y compartir
 1. Descomprime el ZIP completo en una carpeta.
 2. Haz doble clic en `index.html`. No requiere instalar programas ni conexión a Internet.
-3. Usa el menú: Inicio, Comunidad, Directorio, Agenda, Editorial y Ser parte. «Ser parte» abre un formulario de prueba.
+3. Usa el menú: Inicio, Quienes somos, Arquitectas y Obras, Podcast, ESPACIOaRQUITECTA LAB y Ser parte. «Ser parte» reúne los accesos a Enviar obra, Membresías y Contacto.
 4. Comparte el ZIP completo, manteniendo las carpetas juntas. No abras el HTML dentro del ZIP sin extraerlo.
 
 También puedes servir la carpeta con `python -m http.server 8080` y abrir `http://localhost:8080`. Detén el servidor con Ctrl+C.
@@ -11,31 +11,25 @@ También puedes servir la carpeta con `python -m http.server 8080` y abrir `http
 ## Qué contiene
 - `index.html`: estructura semántica, menú principal de seis opciones y pie con enlaces a Instagram, Spotify y LinkedIn.
 - `css/styles.css`: identidad visual, estilos responsivos y foco de teclado.
-- `js/app.js`: páginas, filtros del directorio y Editorial, publicaciones y formularios, sin dependencias.
+- `js/app.js`: páginas, filtros de directorio, obras y podcast, publicaciones y formularios, sin dependencias.
 - `js/participation.js` y `css/participation.css`: reacciones, comentarios de demostración y presentación discreta de la participación.
-- `data/demo.js`: seis perfiles, tres actividades y siete publicaciones ficticias, con reacciones y comentarios iniciales también ficticios. Cada publicación tiene un identificador único, un formato y una o varias temáticas.
-- `assets/`: símbolo, cinco ilustraciones SVG originales y animación conceptual WebM sin audio.
+- `data/demo.js`: seis perfiles, tres actividades y cinco publicaciones ficticias, con reacciones y comentarios iniciales también ficticios. Cada publicación tiene un identificador único, un formato y una o varias temáticas.
+- `assets/`: símbolo, cinco ilustraciones SVG originales y videos de portada y podcast.
 - `scripts/create_assets.py`: fuente reproducible de las ilustraciones, sin dependencias.
-- `scripts/record-video.html`: herramienta opcional para regenerar el video en un navegador con MediaRecorder. Genera, descarga y copia el archivo como `assets/espacio-demo.webm`.
 - `VERIFICACION.md`: comprobaciones efectuadas y límites de validación.
-- `NAVEGACION.md`: mapa Mermaid actualizado, rutas y explicación de las clasificaciones editoriales.
+- `NAVEGACION.md`: mapa Mermaid y rutas vigentes.
 - `navegacion.mmd`: fuente del diagrama Mermaid para reutilizar.
 
 ## Funcionalidades implementadas
 Navegación mediante rutas hash compatible con archivos locales y hosting estático; enlaces directos y volver/avanzar del navegador; menú móvil con estado expandido; búsqueda sin distinción de tildes o mayúsculas; filtros combinables de ciudad y especialidad; contador y estado vacío; restablecimiento de filtros; fichas profesionales sencillas con presentación y contacto demostrativo; agenda y detalle de actividades; formularios con errores por campo, foco en el primer error y confirmación explícita de demostración; estados hover, foco y sección activa.
 
-Editorial reúne todas las publicaciones, incluidos los contenidos sobre proyectos. Tiene dos clasificaciones independientes y combinables:
-
-- **Formato:** Podcast, Video, Entrevista y Artículo escrito.
-- **Temática:** Personas, Proyectos, Tendencias, Innovación, Sustentabilidad y Comunidad.
-
-Cada publicación aparece una sola vez y tiene una página de detalle `#/publicacion/identificador`, aunque pertenezca a varias temáticas. «Proyectos» es únicamente una temática editorial; no hay sección, entidad de proyecto, galería ni enlaces de proyectos desde las fichas profesionales. El video conceptual existente se reproduce en su publicación editorial. El ejemplo de podcast presenta sinopsis y guion, claramente identificados como demostrativos; no incluye audio. No se han incorporado reproductores, inscripciones ni servicios reales adicionales.
+Las obras y el podcast tienen listados propios. Sus detalles usan `#/publicacion/identificador` y ofrecen un enlace de retorno a su listado. Los artículos de Encuentros se abren desde ESPACIOaRQUITECTA LAB.
 
 Comunidad no contiene un video de presentación independiente. El pie de todas las páginas contiene enlaces externos a Instagram, Spotify y LinkedIn, con sus logos y nombres visibles. Se abren en una pestaña nueva; no hay enlace a Comunidad ni otros enlaces internos en el pie. La marca del pie es texto. La documentación técnica y las posibilidades futuras se mantienen en estos archivos, fuera de la navegación del sitio.
 
-En cada publicación, cualquiera sea su formato, se puede activar o retirar «Me gusta» mediante un corazón con contador, leer comentarios ficticios y publicar un comentario de prueba. Los campos vacíos o con solo espacios no se aceptan. Los comentarios nuevos se muestran de inmediato como «Visitante de demostración», sin pedir nombre, correo o autenticación. Se insertan como texto literal, sin interpretar HTML. El límite es de 1.000 caracteres.
+En las publicaciones de demostración y en los artículos de Encuentros, se puede activar o retirar «Me gusta» mediante un corazón con contador, leer comentarios ficticios y publicar un comentario de prueba. Los campos vacíos o con solo espacios no se aceptan. Los comentarios nuevos se muestran de inmediato como «Visitante de demostración», sin pedir nombre, correo o autenticación. Se insertan como texto literal, sin interpretar HTML. El límite es de 1.000 caracteres.
 
-Las reacciones y comentarios se mantienen por publicación en memoria durante la navegación en la misma pestaña. Las tarjetas de Editorial y de Inicio reflejan los totales al volver a ellas. **Al recargar o cerrar la pestaña se pierde la participación de prueba y se restablecen los datos ficticios iniciales.** Un aviso junto a los controles explica que no se envía nada a un servidor. No se incorporan respuestas anidadas, valoraciones negativas ni notificaciones.
+Las reacciones y comentarios se mantienen por publicación en memoria durante la navegación en la misma pestaña. Las tarjetas de Obras, Podcast y Encuentros reflejan los totales al volver a ellas. **Al recargar o cerrar la pestaña se pierde la participación de prueba y se restablecen los datos ficticios iniciales.** Un aviso junto a los controles explica que no se envía nada a un servidor. No se incorporan respuestas anidadas, valoraciones negativas ni notificaciones.
 
 ## Simulaciones y protección de datos
 Los formularios de Ser parte, contacto e inscripción **solo son recorridos demostrativos**. Se validan en memoria y se limpian al terminar la prueba. Las reacciones y comentarios editoriales también son demostrativos y se conservan únicamente en memoria hasta recargar la pestaña. No existe envío de red ni recepción por la organización; los avisos y confirmaciones lo indican expresamente. No uses datos personales reales. No hay autenticación, pagos, gestión real de membresías, analítica, cookies ni almacenamiento persistente local o remoto. Los perfiles, obras, comentarios iniciales, contadores y fechas son ficticios. El video y las imágenes son conceptuales, no institucionales.
@@ -75,4 +69,4 @@ Los logos de las redes se encuentran como SVG locales en `assets/redes/`. Los de
 
 ## Listados desde Inicio
 
-«Sus Voces» (`#/voces`) lista los podcasts y «Sus Proyectos» (`#/proyectos`) las publicaciones de temática Proyectos. Ambos permiten filtrar por arquitecta y tema, combinarlos y restablecerlos. `architectIds` vincula publicaciones con los identificadores de profesionales; la ausencia de vínculo aparece como «Sin arquitecta asignada». El podcast actual sigue siendo un guion demostrativo sin audio. El enlace «HABITAR EL ENCUENTRO» sobre el video lleva a Comunidad.
+«Sus Voces» (`#/voces`) lista los podcasts y «Sus Proyectos» (`#/proyectos`) las publicaciones de temática Proyectos. Ambos permiten filtrar por arquitecta y tema, combinarlos y restablecerlos. `architectIds` vincula publicaciones con los identificadores de profesionales; la ausencia de vínculo aparece como «Sin arquitecta asignada». El listado del podcast incluye un enlace a Spotify y un guion demostrativo. El enlace «DESCUBRE EL ESPACIO» sobre el video lleva a Comunidad.
