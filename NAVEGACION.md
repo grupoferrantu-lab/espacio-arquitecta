@@ -9,11 +9,11 @@ flowchart TD
     D --> PF["Ficha profesional"] & S
     PF --> W["Obras de la arquitecta"] & CP["Contacto profesional"]
     P & W --> PUB["Detalle de obra"]
-    V --> EP["Detalle de podcast"] & SP["Spotify"] & CT["Contacto general"]
+    V --> SP["Spotify"] & CT["Contacto general"]
     L --> A["Agenda"] & M["Mentorías"] & E["Encuentros"]
     A --> AC["Detalle de actividad"] --> IN["Inscripción"]
     E --> ART["Artículo de Encuentros"]
-    PUB & EP & ART --> PARTICIPACION["Reacciones y comentarios en publicaciones de demostración"]
+    ART --> PARTICIPACION["Reacciones y comentarios de prueba"]
     S --> EO["Enviar obra"] & ME["Membresías"] & CT
     ME --> A & CM["Contacto de membresía"] & CO["Contacto comercial"]
     FOOT["Pie de página"] --> IG["Instagram"] & SP & LI["LinkedIn"]
@@ -25,10 +25,10 @@ flowchart TD
 | Directorio y perfil | `#/directorio`, `#/perfil/:id` |
 | Obras | `#/proyectos`, `#/proyectos/:id` para las obras de una arquitecta |
 | Podcast | `#/voces` |
-| Detalles de obras y podcast | `#/publicacion/:id` |
+| Detalles de obras | `#/publicacion/:id` |
 | LAB, mentorías y artículos de Encuentros | `#/servicios`, `#/servicios/mentoria`, `#/servicios/encuentros`, `#/encuentros/:id` |
 | Agenda e inscripción | `#/agenda`, `#/actividad/:id`, `#/inscripcion/:id` |
 | Enviar obra y membresías | `#/participa/obra`, `#/membresias` |
 | Contacto | `#/contacto`, `#/contacto/:id`, `#/contacto/membresia`, `#/contacto/publicidad` |
 
-Los listados de Podcast y Obras permiten combinar filtros de arquitecta y tema. Cada detalle enlaza a su listado correspondiente. Los artículos de Encuentros vuelven a su listado en el LAB. Las reacciones y comentarios de prueba se mantienen en memoria mientras se navega en la misma pestaña.
+Los listados de Podcast y Obras permiten combinar filtros de arquitecta y tema. El episodio visible en Podcast enlaza a Spotify. Los artículos de Encuentros vuelven a su listado en el LAB. Las reacciones y comentarios de prueba se mantienen en memoria mientras se navega en la misma pestaña.

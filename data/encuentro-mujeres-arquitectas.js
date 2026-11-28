@@ -1,5 +1,5 @@
 /* Artículo de la conversación abierta de ESPACIOaRQUITECTA. */
-window.EncounterArticle = {
+export const encounterArticle = {
   id: 'mujeres-arquitectas',
   title: '¿Dónde están las mujeres arquitectas?',
   description: 'Del talento al liderazgo: una conversación sobre las oportunidades, las barreras y los espacios que aún necesitamos construir.',

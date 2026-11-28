@@ -28,7 +28,7 @@
 
 ## Participación editorial: pruebas de la actualización anterior
 
-- Sintaxis de `js/participation.js`, `js/app.js` y `data/demo.js` comprobada con Node, sin errores.
+- Sintaxis de `js/participation.js`, `js/app.js` y los datos de demostración comprobada con Node, sin errores.
 - Pruebas en navegador sobre las siete publicaciones, cubriendo los cuatro formatos. En cada una: activar Me gusta suma uno, cambia `aria-pressed` a true y muestra el corazón relleno; retirarlo resta uno y devuelve el estado inicial.
 - En las siete publicaciones, un comentario de prueba se agregó inmediatamente, con el nombre «Visitante de demostración», y aumentó el contador de comentarios en uno.
 - Al volver a Editorial y abrir nuevamente cada publicación, se conservaron la reacción y el comentario de esa publicación. Las tarjetas mostraron los totales actualizados. Las publicaciones conservaron estados independientes.
