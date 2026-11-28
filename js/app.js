@@ -16,7 +16,7 @@ const heading=(k,title,desc='')=>`<div class="intro"><p class="eyebrow">${k}</p>
 const shell=html=>`<section class="wrap">${html}</section>`;
 const crumb=(path,label)=>`<div class="breadcrumb">${link('inicio','Inicio')} / ${link(path,label)}</div>`;
 function home(){return `<section class="hero"><div class="hero-copy"><p class="eyebrow">Arquitectura · Comunidad · Conexiones</p><h1>Un espacio para<br><em>construir juntas.</em></h1><p class="lead">Conectamos miradas, compartimos experiencias y damos lugar a nuevas posibilidades en la arquitectura.</p><div class="actions">${link('voces','Sus Voces','button secondary')}${link('proyectos','Sus Obras','button secondary')}</div><p class="micro">Una comunidad por imaginar. Una maqueta para explorar.</p></div><div class="hero-art"><img src="assets/patio.svg" alt="Ilustración arquitectónica de un patio con arcos, vegetación y luz cálida" width="800" height="800"><video class="hero-video" src="assets/video_inicio.mp4" poster="assets/patio.svg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><div class="art-caption">${link('comunidad','DESCUBRE EL ESPACIO')}<span>Ilustración conceptual · Demo</span></div></div></section><div class="strip"><span>Miradas diversas</span><span>Conocimiento compartido</span><span>Conexiones que crecen</span></div>`;}
-function directory(){return shell(heading('Arquitectas y Obras', 'Conoce a nuestras arquitectas') + `
+function directory(){return shell(heading('Arquitectas|Oficios y Obras', 'Conoce a nuestras arquitectas') + `
     <div class="split directory-intro">
       <div class="prose directory-prose">
         <p>Aquí están las arquitectas y lo que han construido. Un directorio para encontrarnos, reconocernos y recomendarnos, y para que las obras hablen tanto como las voces.</p>
@@ -71,7 +71,7 @@ function community() {
       <p>Ana María Torres, arquitecta, fundadora de ESPACIOaRQUITECTA. Experta en edificación pública y proyectos complejos. Mentora y coach, disfruta inspirando y compartiendo experiencia y recetas concretas para alcanzar metas.</p>
     </div>
     <section class="founders" aria-labelledby="founders-title">
-      <h2 id="founders-title">Creadoras de ESPACIOaRQUITECTA</h2>
+      <h2 id="founders-title">Equipo de ESPACIOaRQUITECTA</h2>
       <div class="founders-grid">
         <article>
           <img src="assets/anita.jpeg" alt="Retrato de Ana María Torres" width="1235" height="1600" loading="lazy">
