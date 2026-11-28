@@ -144,7 +144,7 @@ function collectionPage(page, person) {
       <p>25 episodios · 25 voces en la temporada 1</p>
       ${link('contacto', '¿Quieres contar tu historia?', 'button secondary')}`
     : '';
-  return shell((person ? crumb('perfil/' + person.id, person.name) : crumb('inicio', 'Inicio')) + (isPodcast ? podcastDetails : heading(person ? 'Arquitectas y Obras' : 'Contenidos de demostración', title, description)) +
+  return shell((person ? crumb('perfil/' + person.id, person.name) : crumb('inicio', 'Inicio')) + (isPodcast ? podcastDetails : heading(person ? 'Arquitectas|Oficios y Obras' : 'Contenidos de demostración', title, description)) +
     `<form class="filters editorial-filters" id="collection-filters" aria-label="Filtros de ${title}">
       ${person ? '' : `<label>Arquitecta<select id="architect"><option value="">Todas las arquitectas</option>
         ${D.people.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
