@@ -77,11 +77,12 @@ La herramienta de navegador permite HTTP/HTTPS y bloquea file://. La apertura po
 
 No se realizó una auditoría formal WCAG ni pruebas con lector de pantalla, todos los dispositivos físicos o todos los navegadores. La reproducción WebM depende del soporte del navegador y dispone de mensaje alternativo ante error. El ejemplo de podcast muestra sinopsis y guion, sin audio. No se publicó el prototipo ni se añadieron servicios de backend.
 
-## Recorrido sugerido
+## Recorrido vigente
 
 1. Inicio → Directorio → filtrar → abrir una ficha → contacto demostrativo.
-2. Editorial → elegir formato y temática → abrir una publicación → volver a Editorial.
-   Dentro de la publicación: activar y retirar Me gusta; leer comentarios; probar un campo vacío y luego publicar texto ficticio; volver desde Editorial y comprobar los totales. Recargar para restablecer la demostración.
-3. Agenda → actividad → inscripción demostrativa.
+2. Inicio → Sus Voces o Sus Obras → abrir un detalle → regresar a Podcast u Obras.
+   En una publicación de demostración, prueba Me gusta y agrega un comentario ficticio. Vuelve al listado y comprueba los totales.
+3. ESPACIOaRQUITECTA LAB → Agenda → actividad → inscripción demostrativa.
 4. Ser parte → probar validaciones con datos inventados.
-5. Pie de cualquier página → Comunidad.
+5. ESPACIOaRQUITECTA LAB → Encuentros → artículo → volver a Encuentros.
+6. Ser parte → Acceder a Membresía → Publicidad → comprobar la selección de contacto comercial.

@@ -36,10 +36,6 @@ window.DEMO = {
   ],
   editorialParticipation: {
     'mujeres-arquitectas': {reactions:0, comments:[]},
-    'colaborar': {reactions:12, comments:[
-      {name:'Antonia Demo', text:'Compartir las preguntas del proceso también puede abrir nuevas colaboraciones.'},
-      {name:'Mar Demo', text:'Me interesa imaginar conversaciones entre distintas generaciones.'}
-    ]},
     'habitar': {reactions:8, comments:[
       {name:'Sol Demo', text:'La relación entre luz y vida cotidiana es una buena invitación a observar.'}
     ]},
@@ -56,31 +52,11 @@ window.DEMO = {
     ]},
     'escuchar-territorio': {reactions:6, comments:[
       {name:'Luz Demo', text:'Este guion invita a observar el territorio desde otras preguntas.'}
-    ]},
-    'miradas-en-movimiento': {reactions:7, comments:[
-      {name:'Eva Demo', text:'La secuencia de arcos transmite bien la idea de conexión.'}
     ]}
   },
-  formats: ["Podcast", "Video", "Entrevista", "Artículo escrito"],
   themes: ["Personas", "Proyectos", "Tendencias", "Innovación", "Sustentabilidad", "Comunidad"],
   podcastTopics: ["Diseño sostenible", "Innovación tecnológica", "Inclusión", "Urbanismo", "Construcción"],
   publications: [
-  {
-    "id": "colaborar",
-    "title": "Diseñar también es aprender a colaborar",
-    "format": "Artículo escrito",
-    "themes": [
-      "Comunidad",
-      "Personas"
-    ],
-    "image": "assets/taller.svg",
-    "alt": "Ilustración de un espacio de trabajo compartido",
-    "text": "La práctica de la arquitectura abre preguntas que crecen cuando se comparten.",
-    "body": [
-      "Este texto de demostración invita a imaginar una red donde el intercambio de experiencias permita explorar respuestas diversas.",
-      "Compartir procesos, preguntas y aprendizajes puede enriquecer nuestra mirada profesional. Una conversación entre distintas trayectorias abre espacio para reconocer experiencias y construir nuevas preguntas."
-    ]
-  },
   {
     "id": "habitar",
     "title": "Otras maneras de mirar el habitar",
@@ -168,23 +144,6 @@ window.DEMO = {
       "Ejemplo de publicación de podcast. Esta maqueta presenta una sinopsis y un fragmento de guion; no incluye audio ni un episodio real.",
       "Pregunta de apertura: ¿qué aprendemos de un lugar cuando nos detenemos a escucharlo? La conversación imaginada recorre el cuidado de espacios compartidos y las preguntas que el territorio aporta al diseño.",
       "Cierre del guion ilustrativo: compartir observaciones puede ser un primer paso para construir una mirada común."
-    ]
-  },
-  {
-    "id": "miradas-en-movimiento",
-    "title": "Miradas en movimiento",
-    "format": "Video",
-    "themes": [
-      "Innovación",
-      "Comunidad"
-    ],
-    "image": "assets/patio.svg",
-    "alt": "Ilustración arquitectónica conceptual",
-    "video": "assets/espacio-demo.webm",
-    "text": "Una breve animación conceptual sobre conectar miradas y construir posibilidades.",
-    "body": [
-      "Video gráfico original de cinco segundos, sin audio y con reproducción manual. Es material de demostración, no una presentación institucional.",
-      "La pieza utiliza una secuencia de arcos para explorar visualmente la conexión entre distintas miradas de la arquitectura."
     ]
   }
 ],

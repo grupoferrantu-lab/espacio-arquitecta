@@ -91,51 +91,23 @@ function community() {
     </section>`);
 }
 
-function editorial() {
-  return shell(heading('Editorial / Publicaciones de demostración', 'Ideas que nos encuentran.',
-    'Personas, obras y conversaciones que amplían nuestra mirada. Explora por formato, por temática o combina ambos filtros.') + `
-    <form class="filters editorial-filters" id="editorial-filters" aria-label="Filtros de publicaciones">
-      <label for="format">Formato<select id="format"><option value="">Todos los formatos</option>
-        ${D.formats.map(x => `<option>${x}</option>`).join('')}</select></label>
-      <label for="theme">Temática<select id="theme"><option value="">Todas las temáticas</option>
-        ${D.themes.map(x => `<option>${x}</option>`).join('')}</select></label>
-      <button type="reset" class="small">Limpiar filtros</button>
-    </form><p id="editorial-count" class="count" role="status"></p>
-    <div class="grid" id="publications"></div>`);
+function publicationSection(publication) {
+  return publication?.format === 'Podcast' ? ['voces', 'Podcast'] : ['proyectos', 'Obras'];
 }
 
 function publication(id) {
   const p = D.publications.find(p => p.id === id);
   if (!p) return missing();
   if (p.source === "sheets") return shell(crumb("proyectos","Obras") + heading("Obra",p.title,p.text) + `<p class="meta">${[p.city,p.year,p.category].filter(Boolean).join(" · ")}</p>${p.image ? `<img class="wide-image" src="${p.image}" alt="${p.alt}">` : ""}<p>${p.architectIds.map(id => D.people.find(a => a.id === id)).filter(Boolean).map(a => link("perfil/"+a.id,a.name)).join(" · ")}</p>`);
-  const media = p.video ? `<video id="publication-video" controls playsinline preload="none"
-    poster="${p.image}" aria-label="${p.title}"></video>
-    <p id="video-help" class="micro">Animación conceptual local, sin audio. No es material institucional.</p>` :
-    `<img class="wide-image" src="${p.image}" alt="${p.alt}" width="1200" height="700">`;
-  return shell(crumb('editorial', 'Editorial') + `<article class="publication-detail">
+  const [returnPath, returnLabel] = publicationSection(p);
+  return shell(crumb(returnPath, returnLabel) + `<article class="publication-detail">
     ${heading(p.format + ' / Publicación ficticia', p.title, p.text)}
     <p class="publication-topics"><span class="meta-label">Temática:</span> ${p.themes.map(x => `<span class="tag">${x}</span>`).join(' ')}</p>
-    ${media}<div class="prose publication-body">${p.body.map(text => `<p>${text}</p>`).join('')}
-    ${notice}</div></article>${participation.render(id)}${link('editorial', 'Volver a Editorial →', 'button secondary')}`);
+    <img class="wide-image" src="${p.image}" alt="${p.alt}" width="1200" height="700">
+    <div class="prose publication-body">${p.body.map(text => `<p>${text}</p>`).join('')}
+    ${notice}</div></article>${participation.render(id)}${link(returnPath, 'Volver a ' + returnLabel + ' →', 'button secondary')}`);
 }
 
-// Una sola colección: pertenecer a varias temáticas no duplica la publicación.
-function initEditorialFilters() {
-  const form = document.querySelector('#editorial-filters');
-  function update() {
-    const format = form.querySelector('#format').value;
-    const theme = form.querySelector('#theme').value;
-    const found = D.publications.filter(p => (!format || p.format === format) && (!theme || p.themes.includes(theme)));
-    document.querySelector('#editorial-count').textContent = `${found.length} de ${D.publications.length} publicaciones ficticias`;
-    document.querySelector('#publications').innerHTML = found.length ? found.map(publicationCard).join('') :
-      '<div class="empty"><h2>No encontramos publicaciones.</h2><p>Prueba otro formato o temática, o limpia los filtros.</p></div>';
-  }
-  form.addEventListener('change', update);
-  form.addEventListener('submit', e => e.preventDefault());
-  form.addEventListener('reset', () => setTimeout(update, 0));
-  update();
-}
-// Listados temáticos: reutilizan los detalles editoriales y sus identificadores.
 const isidoraEpisode = {
   architectIds: ['isidora-gouet'],
   podcastTopics: ['Iluminación'],
@@ -305,9 +277,7 @@ function render() {
     case 'perfil': html = profile(id); break;
     case 'voces':
     case 'proyectos': html = id && page === 'proyectos' && !person ? missing() : collectionPage(page, person); break;
-    case 'editorial': html = editorial(); break;
     case 'publicacion': html = publication(id); break;
-    case 'avisos': html = shell(heading('Comunidad', 'Avisos', 'No hay avisos publicados por el momento.')); break;
     case 'agenda':
       html = shell(heading('Agenda / Actividades ficticias', 'Encontrarnos abre caminos.',
         'Fechas ilustrativas, sin convocatoria vigente ni inscripciones reales. Año de referencia: 2026.') + notice + D.events.map(eventRow).join(''));
@@ -331,7 +301,8 @@ function render() {
   nav.querySelector('.join-menu').open = false;
   nav.classList.remove('open');
   menu.setAttribute('aria-expanded', 'false');
-  const activePage = person ? 'directorio' : page === 'participa' && id === 'membresia' ? 'membresias' : page === 'contacto' && id === 'membresia' ? 'contacto' : page === 'contacto' && !id ? 'comunidad' : {encuentros:'servicios', proyectos:'editorial', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda', publicacion:'editorial'}[page] || page;
+  const navigationPage = page === 'publicacion' ? publicationSection(D.publications.find(p => p.id === id))[0] : page;
+  const activePage = person ? 'directorio' : page === 'participa' && id === 'membresia' ? 'membresias' : page === 'contacto' && id === 'membresia' ? 'contacto' : page === 'contacto' && !id ? 'comunidad' : {encuentros:'servicios', proyectos:'directorio', perfil:'directorio', contacto:'directorio', actividad:'agenda', inscripcion:'agenda'}[navigationPage] || navigationPage;
   nav.querySelectorAll('a').forEach(a => {
     if (a.hash === '#/' + activePage) a.setAttribute('aria-current', 'page');
     else a.removeAttribute('aria-current');
@@ -341,10 +312,8 @@ function render() {
   if (location.hash) main.focus({preventScroll:true});
   if (page === 'inicio') initHeroVideo();
   if (page === 'directorio') initFilters();
-  if (page === 'editorial') initEditorialFilters();
   if (document.querySelector('#collection-filters')) initCollectionFilters(page, person);
   if (document.querySelector('#demo-form')) initForm();
-  if (document.querySelector('#publication-video')) initVideo();
   if (document.querySelector('#editorial-participation')) participation.mount(id);
 }
 function normalize(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
@@ -358,13 +327,6 @@ function initHeroVideo() {
   video.addEventListener('playing', () => video.classList.add('is-playing'));
   video.addEventListener('error', fallback);
   video.play().catch(fallback);
-}
-function initVideo() {
-  const video = document.querySelector('#publication-video');
-  video.src = 'assets/espacio-demo.webm';
-  video.addEventListener('error', () => {
-    document.querySelector('#video-help').textContent = 'Este navegador no pudo reproducir el video WebM. Puedes leer el texto de la publicación.';
-  });
 }
 document.addEventListener('click', e => { const dropdown=nav.querySelector('.join-menu'); if(!dropdown.contains(e.target)) dropdown.open=false; });
 // Cerrar también al elegir la sección que ya está abierta en el menú móvil.
@@ -402,7 +364,7 @@ async function loadSheetArchitects() {
       ids.add(row.id);
     }
     architectLoadState = 'ready';
-    if (/^#\/(directorio|perfil|proyectos|contacto|publicacion|editorial|voces)(\/|$)/.test(location.hash)) render();
+    if (/^#\/(directorio|perfil|proyectos|contacto|publicacion|voces)(\/|$)/.test(location.hash)) render();
   } catch (error) {
     architectLoadState = 'error';
     console.warn('POC Google Sheets: no se pudieron cargar los perfiles.', error);
